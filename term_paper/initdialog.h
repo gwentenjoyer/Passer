@@ -14,8 +14,16 @@ class InitDialog : public QDialog
 public:
     InitDialog(QWidget *parent = nullptr);
     ~InitDialog();
+//    bool choseOption();
+
+private slots:
+
+    void on_pbOpen_clicked();
+
+    void on_pbCreate_clicked();
 
 private:
     Ui::InitDialog *ui;
+    bool optionChosen;
 };
 #endif // INITDIALOG_H

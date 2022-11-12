@@ -11,15 +11,18 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     initdialog.cpp \
-    windowcreate.cpp
+    windowcreate.cpp \
+    windowopen.cpp
 
 HEADERS += \
     initdialog.h \
-    windowcreate.h
+    windowcreate.h \
+    windowopen.h
 
 FORMS += \
     initdialog.ui \
-    windowcreate.ui
+    windowcreate.ui \
+    windowopen.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

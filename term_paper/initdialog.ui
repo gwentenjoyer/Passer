@@ -24,7 +24,7 @@
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>
-     <widget class="QPushButton" name="pushButton">
+     <widget class="QPushButton" name="pbOpen">
       <property name="text">
        <string>Open database...</string>
       </property>
@@ -44,7 +44,7 @@
      </spacer>
     </item>
     <item>
-     <widget class="QPushButton" name="pushButton_2">
+     <widget class="QPushButton" name="pbCreate">
       <property name="text">
        <string>Create new database...</string>
       </property>
