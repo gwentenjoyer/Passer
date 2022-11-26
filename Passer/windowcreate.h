@@ -15,6 +15,9 @@ public:
     explicit WindowCreate(QWidget *parent = nullptr);
     ~WindowCreate();
 
+private slots:
+    void on_pbCancel_clicked();
+
 private:
     Ui::WindowCreate *ui;
 };

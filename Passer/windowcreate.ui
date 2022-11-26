@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Create new account</string>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QLabel" name="label">
@@ -73,6 +73,19 @@
      <string>Sign in</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="pbCancel">
+    <property name="geometry">
+     <rect>
+      <x>160</x>
+      <y>210</y>
+      <width>80</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Cancel</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -83,12 +96,6 @@
      <height>21</height>
     </rect>
    </property>
-   <widget class="QMenu" name="menuCreate_new_account">
-    <property name="title">
-     <string>Create new account</string>
-    </property>
-   </widget>
-   <addaction name="menuCreate_new_account"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>

@@ -2,6 +2,7 @@
 #define INITDIALOG_H
 
 #include <QDialog>
+#include <QMainWindow>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class InitDialog; }
@@ -24,6 +25,8 @@ private slots:
 
 private:
     Ui::InitDialog *ui;
+    QMainWindow *wOpen;
+    QMainWindow *wCreate;
     bool optionChosen;
 };
 #endif // INITDIALOG_H

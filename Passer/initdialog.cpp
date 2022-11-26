@@ -6,6 +6,8 @@
 InitDialog::InitDialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::InitDialog)
+    , wCreate(nullptr)
+    , wOpen(nullptr)
 {
     ui->setupUi(this);
     connect(ui->pbExit, &QPushButton::clicked, this, &QApplication::quit);
@@ -29,17 +31,19 @@ InitDialog::~InitDialog()
 void InitDialog::on_pbOpen_clicked()
 {
 //    optionChosen = true;
-    WindowOpen *winOp = new WindowOpen;
+    WindowOpen *winOp = new WindowOpen(this);
 //    WindowOpen winOp;
 //    optionChosen = false;
-    this->hide();
+
+//    this->hide();
+    this->setVisible(false);
     winOp->show();
 }
 
 
 void InitDialog::on_pbCreate_clicked()
 {
-    WindowCreate *winCr = new WindowCreate;
+    WindowCreate *winCr = new WindowCreate(this);
 //    WindowCreate winCr;
 //    optionChosen = false;
     this->hide();
