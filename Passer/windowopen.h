@@ -18,6 +18,8 @@ public:
 private slots:
     void on_pbCancel_clicked();
 
+    void on_pbLogin_clicked();
+
 private:
     Ui::WindowOpen *ui;
 };

@@ -25,8 +25,8 @@ private slots:
 
 private:
     Ui::InitDialog *ui;
-    QMainWindow *wOpen;
-    QMainWindow *wCreate;
-    bool optionChosen;
+//    QMainWindow *wOpen;
+//    QMainWindow *wCreate;
+//    bool optionChosen;
 };
 #endif // INITDIALOG_H

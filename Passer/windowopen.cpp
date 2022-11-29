@@ -2,13 +2,15 @@
 #include "ui_windowopen.h"
 #include "initdialog.h"
 #include <iostream>
-#define QT_FATAL_WARNINGS
+#include "datawindow.h"
+
 WindowOpen::WindowOpen(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::WindowOpen)
 {
     ui->setupUi(this);
 //    connect(ui->pbCancel, &QPushButton::clicked, parent, &QWidget::show);
+//    connect(ui->pbLogin, &QPushButton::clicked, parent, &QWidget::show);
 }
 
 WindowOpen::~WindowOpen()
@@ -23,5 +25,14 @@ void WindowOpen::on_pbCancel_clicked()
 
     ((InitDialog*) parentWidget())->show();
     delete this;
+}
+
+
+void WindowOpen::on_pbLogin_clicked()
+{
+    DataWindow *dw = new DataWindow(this);
+    dw->show();
+    hide();
+
 }
 

@@ -6,8 +6,8 @@
 InitDialog::InitDialog(QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::InitDialog)
-    , wCreate(nullptr)
-    , wOpen(nullptr)
+//    , wCreate(nullptr)
+//    , wOpen(nullptr)
 {
     ui->setupUi(this);
     connect(ui->pbExit, &QPushButton::clicked, this, &QApplication::quit);
