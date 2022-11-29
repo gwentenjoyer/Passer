@@ -14,7 +14,7 @@
 
 #include <QSqlDatabase>
 #include <QVariantList>
-
+#include <string>
 //#include <dbmanager.h>
 
 /* Директиви імен таблиці, полів таблиці і бази даних */
@@ -31,12 +31,13 @@
 class SqliteDBManager {
 
 public:
-    static SqliteDBManager* getInstance();
+//    static SqliteDBManager* getInstance();
+    SqliteDBManager* getInstance();
 
     /* Методи для безпосередньої роботи з класом
      * Підключення до бази даних і вставка записів у таблицю
      * */
-    void connectToDataBase();
+    void connectToDataBase(const QString dbName);
     QSqlDatabase getDB();
     bool inserIntoTable(const QString tableName, const QVariantList &data);
 
@@ -46,7 +47,7 @@ private:
 
 private:
 
-    static SqliteDBManager* instance;
+    SqliteDBManager* instance;
 
     SqliteDBManager();
 

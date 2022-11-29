@@ -3,6 +3,7 @@
 #include "initdialog.h"
 #include <iostream>
 #include "datawindow.h"
+#include "sqlitedbmanager.h"
 
 WindowOpen::WindowOpen(QWidget *parent) :
     QMainWindow(parent),
@@ -30,6 +31,7 @@ void WindowOpen::on_pbCancel_clicked()
 
 void WindowOpen::on_pbLogin_clicked()
 {
+    SqliteDBManager users;
     DataWindow *dw = new DataWindow(this);
     dw->show();
     hide();

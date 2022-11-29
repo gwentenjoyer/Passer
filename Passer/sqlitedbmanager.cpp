@@ -29,12 +29,13 @@ SqliteDBManager* SqliteDBManager::getInstance()
 
 /* Методи для підключення до бази даних
  * */
-void SqliteDBManager::connectToDataBase()
+//void SqliteDBManager::connectToDataBase()
+void connectToDataBase(const QString dbName)
 {
     /* Перед підключенням до бази даних виконуємо перевірку на її існування.
      * В залежності від результату виконуємо відкриття бази даних або її відновлення
      * */
-    if(QFile(DATABASE_NAME).exists()){
+    if(QFile(dbName).exists()){
         this->openDataBase();
     } else {
         this->restoreDataBase();
@@ -64,14 +65,14 @@ bool SqliteDBManager::restoreDataBase()
 
 /* Методи для відкриття бази даних
  * */
-bool SqliteDBManager::openDataBase()
+bool SqliteDBManager::openDataBase(const QString dbName, const QString hostName)
 {
     /* База даних відкривається по вказаному шляху
      * і імені бази даних, якщо вона існує
      * */
     db = QSqlDatabase::addDatabase("QSQLITE");
-    db.setHostName(DATABASE_HOSTNAME);
-    db.setDatabaseName(DATABASE_NAME);
+    db.setHostName(hostName);
+    db.setDatabaseName(dbName);
     if(db.open()){
         return true;
     } else
