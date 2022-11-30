@@ -31,7 +31,9 @@ void WindowOpen::on_pbCancel_clicked()
 
 void WindowOpen::on_pbLogin_clicked()
 {
-    SqliteDBManager users;
+    SqliteDBManager *users = new SqliteDBManager;
+    users->getObject();
+    users->connectToDataBase("mybdor.sqlite", "localhost");
     DataWindow *dw = new DataWindow(this);
     dw->show();
     hide();

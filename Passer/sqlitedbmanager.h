@@ -32,14 +32,16 @@ class SqliteDBManager {
 
 public:
 //    static SqliteDBManager* getInstance();
-    SqliteDBManager* getInstance();
+    SqliteDBManager();
+    SqliteDBManager* getObject();
 
     /* Методи для безпосередньої роботи з класом
      * Підключення до бази даних і вставка записів у таблицю
      * */
-    void connectToDataBase(const QString dbName);
+//    void connectToDataBase(const QString dbName);
+    void connectToDataBase(const QString& dbName, const QString& hostName);
     QSqlDatabase getDB();
-    bool inserIntoTable(const QString tableName, const QVariantList &data);
+    bool inserIntoTable(const QString& tableName, const QVariantList &data);
 
 private:
     // Сам об'єкт бази даних, з яким буде виконуватись робота
@@ -47,14 +49,15 @@ private:
 
 private:
 
-    SqliteDBManager* instance;
+    SqliteDBManager* dbase;
 
-    SqliteDBManager();
+//    SqliteDBManager();
 
     /* Внутрішні методи для роботи з базою даних
      * */
-    bool openDataBase();
-    bool restoreDataBase();
+//    bool openDataBase();
+    bool openDataBase(const QString& dbName, const QString& hostName);
+    bool restoreDataBase(const QString& dbName, const QString& hostName);
     void closeDataBase();
     bool createTables();
 };

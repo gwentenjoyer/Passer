@@ -13,32 +13,31 @@
 #include <QDate>
 #include <QDebug>
 
-SqliteDBManager* SqliteDBManager::instance = nullptr;
+//SqliteDBManager* SqliteDBManager::dbase = nullptr;
 
-SqliteDBManager::SqliteDBManager(){
+SqliteDBManager::SqliteDBManager() : dbase(nullptr)
+{}
 
-}
-
-SqliteDBManager* SqliteDBManager::getInstance()
+SqliteDBManager* SqliteDBManager::getObject()
 {
-    if(instance == nullptr){
-        instance = new SqliteDBManager();
+    if(dbase == nullptr){
+        dbase = new SqliteDBManager();
     }
-    return instance;
+    return dbase;
 }
 
 /* Методи для підключення до бази даних
  * */
 //void SqliteDBManager::connectToDataBase()
-void connectToDataBase(const QString dbName)
+void SqliteDBManager::connectToDataBase(const QString& dbName, const QString& hostName)
 {
     /* Перед підключенням до бази даних виконуємо перевірку на її існування.
      * В залежності від результату виконуємо відкриття бази даних або її відновлення
      * */
     if(QFile(dbName).exists()){
-        this->openDataBase();
+        this->openDataBase(dbName, hostName);
     } else {
-        this->restoreDataBase();
+        this->restoreDataBase(dbName, hostName);
     }
 }
 
@@ -49,9 +48,9 @@ QSqlDatabase SqliteDBManager::getDB()
 
 /* Методи відновлення бази даних
  * */
-bool SqliteDBManager::restoreDataBase()
+bool SqliteDBManager::restoreDataBase(const QString& dbName, const QString& hostName)
 {
-    if(this->openDataBase()){
+    if(this->openDataBase(dbName, hostName)){
         if(!this->createTables()){
             return false;
         } else {
@@ -65,7 +64,7 @@ bool SqliteDBManager::restoreDataBase()
 
 /* Методи для відкриття бази даних
  * */
-bool SqliteDBManager::openDataBase(const QString dbName, const QString hostName)
+bool SqliteDBManager::openDataBase(const QString& dbName, const QString& hostName)
 {
     /* База даних відкривається по вказаному шляху
      * і імені бази даних, якщо вона існує
@@ -86,8 +85,6 @@ void SqliteDBManager::closeDataBase()
     db.close();
 }
 
-/* Метод для створення таблиці в базі даних
- * */
 bool SqliteDBManager::createTables()
 {
     /* В даному випадку використовується фурмування сирого SQL-запиту
@@ -95,11 +92,10 @@ bool SqliteDBManager::createTables()
      * */
     QSqlQuery query;
     if(!query.exec( "CREATE TABLE " TABLE_EXAMPLE " ("
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT, "
-                    TABLE_EXAMPLE_DATE      " DATE            NOT NULL,"
-                    TABLE_EXAMPLE_TIME      " TIME            NOT NULL,"
-                    TABLE_EXAMPLE_RANDOM    " INTEGER         NOT NULL,"
-                    TABLE_EXAMPLE_MESSAGE   " VARCHAR(255)    NOT NULL"
+                    " id INTEGER PRIMARY KEY AUTOINCREMENT, "
+                    " username varchar(64) NOT NULL,"
+                    " password varchar(64)            NOT NULL,"
+                    " UNIQUE(username)"
                     " )"
                     )){
         qDebug() << "DataBase: error of create " << TABLE_EXAMPLE;
@@ -108,10 +104,33 @@ bool SqliteDBManager::createTables()
     } else
         return true;
 }
+/* Метод для створення таблиці в базі даних
+ * */
+//bool SqliteDBManager::createTables()
+//{
+//    /* В даному випадку використовується фурмування сирого SQL-запиту
+//     * з наступним його виконанням.
+//     * */
+//    QSqlQuery query;
+//    if(!query.exec( "CREATE TABLE " TABLE_EXAMPLE " ("
+//                    "id INTEGER PRIMARY KEY AUTOINCREMENT, "
+//                    TABLE_EXAMPLE_DATE      " DATE            NOT NULL,"
+//                    TABLE_EXAMPLE_TIME      " TIME            NOT NULL,"
+//                    TABLE_EXAMPLE_RANDOM    " INTEGER         NOT NULL,"
+//                    TABLE_EXAMPLE_MESSAGE   " VARCHAR(255)    NOT NULL"
+//                    " )"
+//                    )){
+//        qDebug() << "DataBase: error of create " << TABLE_EXAMPLE;
+//        qDebug() << query.lastError().text();
+//        return false;
+//    } else
+//        return true;
+//}
+
 
 /* Метод для вставки записів у базу даних
  * */
-bool SqliteDBManager::inserIntoTable(const QString tableName, const QVariantList &data)
+bool SqliteDBManager::inserIntoTable(const QString& tableName, const QVariantList &data)
 {
     /* Запит SQL формується із QVariantList,
      * в який передаються данні для вставки в таблицю.

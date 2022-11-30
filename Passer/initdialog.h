@@ -3,6 +3,7 @@
 
 #include <QDialog>
 #include <QMainWindow>
+#include "sqlitedbmanager.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class InitDialog; }
