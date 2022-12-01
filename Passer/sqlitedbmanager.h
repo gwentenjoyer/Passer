@@ -1,21 +1,9 @@
-//#ifndef SQLITEDBMANAGER_H
-//#define SQLITEDBMANAGER_H
-
-
-//class SqliteDbManager
-//{
-//public:
-//    SqliteDbManager();
-//};
-
-//#endif // SQLITEDBMANAGER_H
 #ifndef DATABASE_H
 #define DATABASE_H
 
 #include <QSqlDatabase>
 #include <QVariantList>
-#include <string>
-//#include <dbmanager.h>
+
 
 /* Директиви імен таблиці, полів таблиці і бази даних */
 #define DATABASE_HOSTNAME   "ExampleDataBase"
@@ -27,21 +15,17 @@
 #define TABLE_EXAMPLE_MESSAGE           "Message"
 #define TABLE_EXAMPLE_RANDOM            "Random"
 
-//class SqliteDBManager : public DBManager {
 class SqliteDBManager {
 
 public:
-//    static SqliteDBManager* getInstance();
-    SqliteDBManager();
-    SqliteDBManager* getObject();
+    static SqliteDBManager* getInstance();
 
     /* Методи для безпосередньої роботи з класом
      * Підключення до бази даних і вставка записів у таблицю
      * */
-//    void connectToDataBase(const QString dbName);
-    void connectToDataBase(const QString& dbName, const QString& hostName);
+    void connectToDataBase();
     QSqlDatabase getDB();
-    bool inserIntoTable(const QString& tableName, const QVariantList &data);
+    bool inserIntoTable(const QString tableName, const QVariantList &data);
 
 private:
     // Сам об'єкт бази даних, з яким буде виконуватись робота
@@ -49,15 +33,14 @@ private:
 
 private:
 
-    SqliteDBManager* dbase;
+    static SqliteDBManager* instance;
 
-//    SqliteDBManager();
+    SqliteDBManager();
 
     /* Внутрішні методи для роботи з базою даних
      * */
-//    bool openDataBase();
-    bool openDataBase(const QString& dbName, const QString& hostName);
-    bool restoreDataBase(const QString& dbName, const QString& hostName);
+    bool openDataBase();
+    bool restoreDataBase();
     void closeDataBase();
     bool createTables();
 };
