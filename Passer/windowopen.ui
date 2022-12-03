@@ -11,10 +11,10 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Log into existing account...</string>
+   <string>Passer - Log into existing account...</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="label">
+   <widget class="QLabel" name="labelUsername">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -40,7 +40,7 @@
      <string>Log in</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit_2">
+   <widget class="QLineEdit" name="lePassword">
     <property name="geometry">
      <rect>
       <x>250</x>
@@ -50,7 +50,7 @@
      </rect>
     </property>
    </widget>
-   <widget class="QLabel" name="label_2">
+   <widget class="QLabel" name="labelPassword">
     <property name="geometry">
      <rect>
       <x>130</x>
@@ -63,7 +63,7 @@
      <string>Password:</string>
     </property>
    </widget>
-   <widget class="QLineEdit" name="lineEdit">
+   <widget class="QLineEdit" name="leUsername">
     <property name="geometry">
      <rect>
       <x>250</x>

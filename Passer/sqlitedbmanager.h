@@ -4,6 +4,9 @@
 #include <QSqlDatabase>
 #include <QVariantList>
 
+//#include <QSqlQuery>
+//#include <QDebug>
+//#include <QSqlError>
 
 /* Директиви імен таблиці, полів таблиці і бази даних */
 #define DATABASE_HOSTNAME               "localhost"
@@ -19,6 +22,12 @@
 #define TABLE_DATA_USERNAME             "username"
 #define TABLE_DATA_PASSWORD             "password"
 
+struct Users{
+    int id;
+    QString username;
+//    QString password;
+};
+
 class SqliteDBManager {
 
 public:
@@ -27,10 +36,21 @@ public:
     /* Методи для безпосередньої роботи з класом
      * Підключення до бази даних і вставка записів у таблицю
      * */
+
+
     void connectToDataBase();
     QSqlDatabase getDB();
-    bool inserIntoUsers(const QString tableName, const QVariantList &data);
-    bool inserIntoData(const QString tableName, const QVariantList &data);
+    bool insertIntoUsers(const QString tableName, const QVariantList &data);
+    bool insertIntoData(const QString tableName, const QVariantList &data);
+
+    //    Users* searchForUser(const QString user, const QString password);
+        Users* searchForUser(const QVariantList &data);
+    //    Users* searchForUser(const QVariantList &data);
+
+    ~SqliteDBManager(){
+        qDebug() << "Database disconnected.";
+        delete instance;
+    }
 
 private:
     // Сам об'єкт бази даних, з яким буде виконуватись робота

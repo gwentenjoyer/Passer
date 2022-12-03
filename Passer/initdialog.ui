@@ -16,9 +16,9 @@
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
     <rect>
-     <x>90</x>
+     <x>80</x>
      <y>60</y>
-     <width>141</width>
+     <width>181</width>
      <height>211</height>
     </rect>
    </property>
@@ -26,7 +26,7 @@
     <item>
      <widget class="QPushButton" name="pbOpen">
       <property name="text">
-       <string>Open database...</string>
+       <string>Log into existing account...</string>
       </property>
      </widget>
     </item>
@@ -46,7 +46,7 @@
     <item>
      <widget class="QPushButton" name="pbCreate">
       <property name="text">
-       <string>Create new database...</string>
+       <string>Create new new account...</string>
       </property>
      </widget>
     </item>

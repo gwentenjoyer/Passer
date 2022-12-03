@@ -13,6 +13,7 @@ InitDialog::InitDialog(SqliteDBManager *dbIns, QWidget *parent)
 {
     ui->setupUi(this);
     connect(ui->pbExit, &QPushButton::clicked, this, &QApplication::quit);
+//    QObject::connect( qApp, SIGNAL(destroyed(InitDialog*)), qApp, SLOT(quit()) );
 }
 
 InitDialog::~InitDialog()
@@ -33,13 +34,14 @@ InitDialog::~InitDialog()
 void InitDialog::on_pbOpen_clicked()
 {
 //    optionChosen = true;
+//    WindowOpen *winOp = new WindowOpen(this->db);
     WindowOpen *winOp = new WindowOpen(this->db, this);
 //    WindowOpen winOp;
 //    optionChosen = false;
 
-//    this->hide();
-    this->setVisible(false);
     winOp->show();
+    this->hide();
+//    this->setVisible(false);
 }
 
 
@@ -48,7 +50,7 @@ void InitDialog::on_pbCreate_clicked()
     WindowCreate *winCr = new WindowCreate(this->db, this);
 //    WindowCreate winCr;
 //    optionChosen = false;
-    this->hide();
     winCr->show();
+    this->hide();
 }
 

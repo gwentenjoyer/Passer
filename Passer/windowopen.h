@@ -3,6 +3,10 @@
 
 #include <QMainWindow>
 #include "sqlitedbmanager.h"
+#include <QCloseEvent>
+#include <QMessageBox>
+#include <QApplication>
+#include "initdialog.h"
 
 namespace Ui {
 class WindowOpen;
@@ -13,7 +17,8 @@ class WindowOpen : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit WindowOpen(SqliteDBManager *dbIns, QWidget *parent = nullptr);
+//    explicit WindowOpen(SqliteDBManager *dbIns, QWidget *parent = nullptr);
+    explicit WindowOpen(SqliteDBManager *dbIns, InitDialog *parent = nullptr);
 //    explicit WindowOpen(QWidget *parent = nullptr);
     ~WindowOpen();
 
@@ -25,6 +30,8 @@ private slots:
 private:
     Ui::WindowOpen *ui;
     SqliteDBManager *db;
+    InitDialog *parentWin;
+    void closeEvent (QCloseEvent *event);
 };
 
 #endif // WINDOWOPEN_H
