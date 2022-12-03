@@ -2,9 +2,10 @@
 #include "ui_windowcreate.h"
 #include "initdialog.h"
 
-WindowCreate::WindowCreate(QWidget *parent) :
+WindowCreate::WindowCreate(SqliteDBManager *dbIns, QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::WindowCreate)
+    ui(new Ui::WindowCreate),
+    db(dbIns)
 {
     ui->setupUi(this);
 }

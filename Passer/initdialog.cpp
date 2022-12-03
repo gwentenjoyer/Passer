@@ -3,9 +3,11 @@
 #include "windowcreate.h"
 #include "windowopen.h"
 
-InitDialog::InitDialog(QWidget *parent)
+
+InitDialog::InitDialog(SqliteDBManager *dbIns, QWidget *parent)
     : QDialog(parent)
     , ui(new Ui::InitDialog)
+    , db(dbIns)
 //    , wCreate(nullptr)
 //    , wOpen(nullptr)
 {
@@ -31,7 +33,7 @@ InitDialog::~InitDialog()
 void InitDialog::on_pbOpen_clicked()
 {
 //    optionChosen = true;
-    WindowOpen *winOp = new WindowOpen(this);
+    WindowOpen *winOp = new WindowOpen(this->db, this);
 //    WindowOpen winOp;
 //    optionChosen = false;
 
@@ -43,7 +45,7 @@ void InitDialog::on_pbOpen_clicked()
 
 void InitDialog::on_pbCreate_clicked()
 {
-    WindowCreate *winCr = new WindowCreate(this);
+    WindowCreate *winCr = new WindowCreate(this->db, this);
 //    WindowCreate winCr;
 //    optionChosen = false;
     this->hide();

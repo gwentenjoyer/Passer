@@ -6,14 +6,18 @@
 
 
 /* Директиви імен таблиці, полів таблиці і бази даних */
-#define DATABASE_HOSTNAME   "ExampleDataBase"
-#define DATABASE_NAME       "DataBase.db"
+#define DATABASE_HOSTNAME               "localhost"
+#define DATABASE_NAME                   "passerdb.sqlite"
 
-#define TABLE_EXAMPLE                   "TableExample"
-#define TABLE_EXAMPLE_DATE              "Date"
-#define TABLE_EXAMPLE_TIME              "Time"
-#define TABLE_EXAMPLE_MESSAGE           "Message"
-#define TABLE_EXAMPLE_RANDOM            "Random"
+#define TABLE_USERS                     "users"
+#define TABLE_USERS_USER                "user"
+#define TABLE_USERS_PASSWORD            "password"
+
+#define TABLE_DATA                      "data"
+#define TABLE_DATA_TITLE                "users"
+#define TABLE_DATA_URL                  "url"
+#define TABLE_DATA_USERNAME             "username"
+#define TABLE_DATA_PASSWORD             "password"
 
 class SqliteDBManager {
 
@@ -25,7 +29,8 @@ public:
      * */
     void connectToDataBase();
     QSqlDatabase getDB();
-    bool inserIntoTable(const QString tableName, const QVariantList &data);
+    bool inserIntoUsers(const QString tableName, const QVariantList &data);
+    bool inserIntoData(const QString tableName, const QVariantList &data);
 
 private:
     // Сам об'єкт бази даних, з яким буде виконуватись робота

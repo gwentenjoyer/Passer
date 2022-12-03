@@ -5,9 +5,10 @@
 #include "datawindow.h"
 #include "sqlitedbmanager.h"
 
-WindowOpen::WindowOpen(QWidget *parent) :
+WindowOpen::WindowOpen(SqliteDBManager *dbIns, QWidget *parent) :
     QMainWindow(parent),
-    ui(new Ui::WindowOpen)
+    ui(new Ui::WindowOpen),
+    db(dbIns)
 {
     ui->setupUi(this);
 //    connect(ui->pbCancel, &QPushButton::clicked, parent, &QWidget::show);
@@ -34,9 +35,11 @@ void WindowOpen::on_pbLogin_clicked()
 //    SqliteDBManager *users = new SqliteDBManager;
 //    users->getObject();
 //    users->connectToDataBase("mybdor.sqlite", "localhost");
-    SqliteDBManager *users = new SqliteDBManager;
-    users->getInstance();
+//    SqliteDBManager *users = new SqliteDBManager;
+//    users->getInstance();
 //    users->connectToDataBase("mybdor.sqlite", "localhost");
+    db->connectToDataBase();
+
     DataWindow *dw = new DataWindow(this);
     dw->show();
     hide();

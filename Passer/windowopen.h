@@ -2,6 +2,7 @@
 #define WINDOWOPEN_H
 
 #include <QMainWindow>
+#include "sqlitedbmanager.h"
 
 namespace Ui {
 class WindowOpen;
@@ -12,7 +13,8 @@ class WindowOpen : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit WindowOpen(QWidget *parent = nullptr);
+    explicit WindowOpen(SqliteDBManager *dbIns, QWidget *parent = nullptr);
+//    explicit WindowOpen(QWidget *parent = nullptr);
     ~WindowOpen();
 
 private slots:
@@ -22,6 +24,7 @@ private slots:
 
 private:
     Ui::WindowOpen *ui;
+    SqliteDBManager *db;
 };
 
 #endif // WINDOWOPEN_H
