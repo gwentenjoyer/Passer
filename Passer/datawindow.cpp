@@ -9,6 +9,7 @@
 #include <QCloseEvent>
 #include <QSqlQueryModel>
 #include "addentry.h"
+#include "editentry.h"
 
 //DataWindow::DataWindow(SqliteDBManager *dbIns, Users *currUser, QWidget *parent) :
 DataWindow::DataWindow(SqliteDBManager *dbIns, Users *currUser, QMainWindow *parent) :
@@ -134,8 +135,30 @@ void DataWindow::on_pbDelete_clicked()
 void DataWindow::on_tableView_clicked(const QModelIndex &index)
 {
     tableSelectedRowDataId = ui->tableView->model()->data(ui->tableView->model()->index(index.row(),0)).toInt();
+    selectedRow = index.row();
 //    qDebug() << index.row();
 //    qDebug() << "Secected id = " + ui->tableView->model()->data(index, 4).toString();
 //    qDebug() << "Secected id = " +    ui->tableView->model()->data(ui->tableView->model()->index(index.row(),0)).toString();
 }
 
+
+void DataWindow::on_pbEdit_clicked()
+{
+    if(ui->tableView->currentIndex().isValid()){
+        EditEntry *editWin = new EditEntry(db, getInfoFromDataSelectedRow(ui->tableView, selectedRow), this);
+        editWin->show();
+    }
+//    selectedRow = 0;
+//    getInfoFromDataSelectedRow(ui->tableView, selectedRow);
+}
+
+QVariantList DataWindow::getInfoFromDataSelectedRow(QTableView *table, int row){
+    QVariantList lst;
+    QAbstractItemModel *model = table->model();
+    int columns = model->columnCount();
+    for (int i = 0; i < columns; ++i){
+        lst.append(model->index(selectedRow, i).data().toString());
+//            qDebug() << lst[i];
+    }
+    return lst;
+}

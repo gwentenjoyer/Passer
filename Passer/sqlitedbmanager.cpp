@@ -14,6 +14,11 @@ SqliteDBManager::SqliteDBManager(){
 
 }
 
+SqliteDBManager::~SqliteDBManager(){
+    qDebug() << "Database disconnected.";
+    delete instance;
+}
+
 SqliteDBManager* SqliteDBManager::getInstance()
 {
     if(instance == nullptr){
@@ -210,12 +215,49 @@ void SqliteDBManager::deleteDataRow(int rowId) {
     query.prepare("DELETE FROM " TABLE_DATA " WHERE id = " + QString::number(rowId) + ";");
 
     if(!query.exec()){
-        qDebug() << "error deleting into " << TABLE_DATA;
+        qDebug() << "error deleting " << TABLE_DATA;
         qDebug() << query.lastError().text();
         qDebug() << query.lastQuery();
         throw query.lastError().text() + " caused by: " + query.lastQuery();
     }
     qDebug() << "Successfully deleted row with id = " + QString::number(rowId);
+}
+
+void SqliteDBManager::updateDataRow(const QVariantList &data) {
+//        QSqlQueryModel *sqlmodel
+//    model->setFilter("account_id = " + currentUser->id);
+    QSqlQuery query;
+
+    for(int i = 0; i < 6; ++i){
+        qDebug() << data[i];
+    }
+    query.prepare("UPDATE  " TABLE_DATA
+                  " SET " TABLE_DATA_TITLE " = '" + data[1].toString() + "', "
+                  " " TABLE_DATA_URL " = '" + data[2].toString() + "', "
+                  " " TABLE_DATA_USERNAME " = '" + data[3].toString() + "', "
+                  " " TABLE_DATA_PASSWORD " = '" + data[4].toString() + "', "
+                  " " TABLE_DATA_DESCRIPTION " = '" + data[5].toString() + "' "
+                  " WHERE id = " + data[0].toString() + ";");
+//    query.prepare("UPDATE  " TABLE_DATA
+//                  " SET " TABLE_DATA_TITLE " = :Title, "
+//                  " SET " TABLE_DATA_URL " = :Url, "
+//                  " SET " TABLE_DATA_USERNAME " = :Username, "
+//                  " SET " TABLE_DATA_PASSWORD " = :Password, "
+//                  " SET " TABLE_DATA_DESCRIPTION " = :Desc, "
+//                  " WHERE id = " + data[0].toString() + ";");
+//    query.bindValue(":Title",        data[1].toString());
+//    query.bindValue(":Url",        data[2].toString());
+//    query.bindValue(":Username",        data[3].toString());
+//    query.bindValue(":Password",        data[4].toString());
+//    query.bindValue(":Desc",        data[5].toString());
+
+    if(!query.exec()){
+        qDebug() << "error updating " << TABLE_DATA;
+        qDebug() << query.lastError().text();
+        qDebug() << query.lastQuery();
+        throw query.lastError().text() + " caused by: " + query.lastQuery();
+    }
+    qDebug() << "Successfully updated row with id = " + data[0].toString();
 }
 
 //    Users* searchForUser(const QString usr, const QString password){

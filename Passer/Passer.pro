@@ -11,6 +11,7 @@ RC_FILE = passer.rc
 SOURCES += \
     addentry.cpp \
     datawindow.cpp \
+    editentry.cpp \
     main.cpp \
     initdialog.cpp \
     sqlitedbmanager.cpp \
@@ -20,6 +21,7 @@ SOURCES += \
 HEADERS += \
     addentry.h \
     datawindow.h \
+    editentry.h \
     initdialog.h \
     sqlitedbmanager.h \
     windowcreate.h \
@@ -28,6 +30,7 @@ HEADERS += \
 FORMS += \
     addentry.ui \
     datawindow.ui \
+    editentry.ui \
     initdialog.ui \
     windowcreate.ui \
     windowopen.ui

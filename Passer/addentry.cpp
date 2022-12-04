@@ -3,6 +3,7 @@
 #include <QString>
 #include <QVariantList>
 #include <QMessageBox>
+#include "datawindow.h"
 
 //AddEntry::AddEntry(QWidget *parent) :
 AddEntry::AddEntry(SqliteDBManager *db, Users *currUser, QMainWindow *parent) :
@@ -21,6 +22,7 @@ AddEntry::AddEntry(SqliteDBManager *db, Users *currUser, QMainWindow *parent) :
 
 AddEntry::~AddEntry()
 {
+//    parentWin->
     delete ui;
 }
 
