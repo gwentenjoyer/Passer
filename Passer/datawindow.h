@@ -32,6 +32,10 @@ private slots:
 
     void on_pbRefresh_clicked();
 
+    void on_pbDelete_clicked();
+
+    void on_tableView_clicked(const QModelIndex &index);
+
 private:
     Ui::DataWindow *ui;
     Users *currentUser;
@@ -43,7 +47,7 @@ private:
 
     QSqlQueryModel* getQueryModel();
     void updateTableViewModel(QTableView *tb);
-
+    int tableSelectedRowDataId;
 //    friend class AddEntry;
 };
 

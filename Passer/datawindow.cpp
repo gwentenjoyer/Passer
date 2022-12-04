@@ -17,7 +17,8 @@ DataWindow::DataWindow(SqliteDBManager *dbIns, Users *currUser, QMainWindow *par
     ui(new Ui::DataWindow),
     currentUser(currUser),
     db(dbIns),
-    sqlModel(nullptr)
+    sqlModel(nullptr),
+    tableSelectedRowDataId(0)
 {
     ui->setupUi(this);
     connect(ui->pbQuit, &QPushButton::clicked, this, &QApplication::quit);
@@ -41,7 +42,7 @@ DataWindow::DataWindow(SqliteDBManager *dbIns, Users *currUser, QMainWindow *par
 //    model->select();
 //    ui->tableView->setModel(sqlModel);
     updateTableViewModel(ui->tableView);
-//    ui->tableView->hideColumn(0);
+    ui->tableView->hideColumn(0);
 //    ui->tableView->hideColumn(1);
 
 }
@@ -93,7 +94,9 @@ QSqlQueryModel* DataWindow::getQueryModel() {
 QSqlQueryModel *sqlmodel = new QSqlQueryModel(this);        // possible memory leak
 //        QSqlQueryModel *sqlmodel
 //    model->setFilter("account_id = " + currentUser->id);
-    sqlmodel->setQuery("SELECT " TABLE_DATA_TITLE ", "
+    sqlmodel->setQuery("SELECT "
+                   TABLE_DATA ".id, "
+                   TABLE_DATA_TITLE ", "
                    TABLE_DATA "." TABLE_DATA_URL ", "
                    TABLE_DATA "." TABLE_DATA_USERNAME ", "
                    TABLE_DATA "." TABLE_DATA_PASSWORD ", "
@@ -115,5 +118,24 @@ void DataWindow::updateTableViewModel(QTableView *tb) {
 void DataWindow::on_pbRefresh_clicked()
 {
     updateTableViewModel(ui->tableView);
+}
+
+
+void DataWindow::on_pbDelete_clicked()
+{
+//    ui->tableView->remo
+    db->deleteDataRow(tableSelectedRowDataId);
+    updateTableViewModel(ui->tableView);
+}
+
+
+
+
+void DataWindow::on_tableView_clicked(const QModelIndex &index)
+{
+    tableSelectedRowDataId = ui->tableView->model()->data(ui->tableView->model()->index(index.row(),0)).toInt();
+//    qDebug() << index.row();
+//    qDebug() << "Secected id = " + ui->tableView->model()->data(index, 4).toString();
+//    qDebug() << "Secected id = " +    ui->tableView->model()->data(ui->tableView->model()->index(index.row(),0)).toString();
 }
 

@@ -43,6 +43,7 @@ public:
     QSqlDatabase getDB();
     bool insertIntoUsers(const QString tableName, const QVariantList &data);
     bool insertIntoData(const QString tableName, Users *usr, const QVariantList &data);
+    void deleteDataRow(int rowId);
 
     //    Users* searchForUser(const QString user, const QString password);
         Users* searchForUser(const QVariantList &data);
@@ -69,6 +70,7 @@ private:
     bool restoreDataBase();
     void closeDataBase();
     bool createTables();
+
 };
 
 

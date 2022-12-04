@@ -203,6 +203,21 @@ bool SqliteDBManager::insertIntoData(const QString tableName, Users *usr, const 
         return true;
 }
 
+void SqliteDBManager::deleteDataRow(int rowId) {
+//        QSqlQueryModel *sqlmodel
+//    model->setFilter("account_id = " + currentUser->id);
+    QSqlQuery query;
+    query.prepare("DELETE FROM " TABLE_DATA " WHERE id = " + QString::number(rowId) + ";");
+
+    if(!query.exec()){
+        qDebug() << "error deleting into " << TABLE_DATA;
+        qDebug() << query.lastError().text();
+        qDebug() << query.lastQuery();
+        throw query.lastError().text() + " caused by: " + query.lastQuery();
+    }
+    qDebug() << "Successfully deleted row with id = " + QString::number(rowId);
+}
+
 //    Users* searchForUser(const QString usr, const QString password){
 Users* SqliteDBManager::searchForUser(const QVariantList &data){
     QSqlQuery query;
