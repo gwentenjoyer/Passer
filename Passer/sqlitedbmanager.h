@@ -10,7 +10,7 @@
 
 /* Директиви імен таблиці, полів таблиці і бази даних */
 #define DATABASE_HOSTNAME               "localhost"
-#define DATABASE_NAME                   "passerdb.sqlite"
+#define DATABASE_NAME                   "passerdb6.sqlite"
 
 #define TABLE_USERS                     "users"
 #define TABLE_USERS_USER                "user"
@@ -42,7 +42,7 @@ public:
     void connectToDataBase();
     QSqlDatabase getDB();
     bool insertIntoUsers(const QString tableName, const QVariantList &data);
-    bool insertIntoData(const QString tableName, const QVariantList &data);
+    bool insertIntoData(const QString tableName, Users *usr, const QVariantList &data);
 
     //    Users* searchForUser(const QString user, const QString password);
         Users* searchForUser(const QVariantList &data);

@@ -1,24 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
  <class>AddEntry</class>
- <widget class="QMainWindow" name="AddEntry">
+ <widget class="QDialog" name="AddEntry">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>725</width>
-    <height>460</height>
+    <width>545</width>
+    <height>405</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Passer - Add new row...</string>
   </property>
-  <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+  <widget class="QWidget" name="centralwidget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>721</width>
+     <height>431</height>
+    </rect>
+   </property>
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
-      <x>120</x>
-      <y>60</y>
+      <x>30</x>
+      <y>50</y>
       <width>481</width>
       <height>311</height>
      </rect>
@@ -27,21 +35,21 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="30,50">
        <item>
-        <widget class="QLabel" name="leTitle">
+        <widget class="QLabel" name="lbTitle">
          <property name="text">
           <string>Title:</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit"/>
+        <widget class="QLineEdit" name="leTitle"/>
        </item>
       </layout>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="30,50">
        <item>
-        <widget class="QLabel" name="leUrl">
+        <widget class="QLabel" name="lbUrl">
          <property name="layoutDirection">
           <enum>Qt::LeftToRight</enum>
          </property>
@@ -54,49 +62,49 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_7"/>
+        <widget class="QLineEdit" name="leUrl"/>
        </item>
       </layout>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_8" stretch="30,50">
        <item>
-        <widget class="QLabel" name="leUsername">
+        <widget class="QLabel" name="lbUsername">
          <property name="text">
           <string>Username:</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_11"/>
+        <widget class="QLineEdit" name="leUsername"/>
        </item>
       </layout>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_9" stretch="30,50">
        <item>
-        <widget class="QLabel" name="lePassword">
+        <widget class="QLabel" name="lbPassword">
          <property name="text">
           <string>Password</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_12"/>
+        <widget class="QLineEdit" name="lePassword"/>
        </item>
       </layout>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_12" stretch="30,50">
        <item>
-        <widget class="QLabel" name="leDescription">
+        <widget class="QLabel" name="lbDescription">
          <property name="text">
           <string>Description</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEdit_15"/>
+        <widget class="QLineEdit" name="leDescription"/>
        </item>
       </layout>
      </item>
@@ -173,7 +181,16 @@
     </rect>
    </property>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QStatusBar" name="statusbar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>3</width>
+     <height>22</height>
+    </rect>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>

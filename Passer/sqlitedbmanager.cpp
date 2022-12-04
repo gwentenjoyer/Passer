@@ -101,12 +101,12 @@ bool SqliteDBManager::createTables()
     queryData.prepare("CREATE TABLE " TABLE_DATA " ("
                         "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
                         "account_id INTEGER NOT NULL, "
-                        TABLE_DATA_TITLE            " VARCHAR(32)  NOT NULL, "
-                        TABLE_DATA_URL              " VARCHAR NOT NULL, "
-                        TABLE_DATA_USERNAME         " VARCHAR(32)  NOT NULL, "
-                        TABLE_DATA_PASSWORD         " VARCHAR(32) NOT NULL, "
+                        TABLE_DATA_TITLE            " VARCHAR(32) UNIQUE NOT NULL CHECK( " TABLE_DATA_TITLE " <> ''), "
+                        TABLE_DATA_URL              " VARCHAR NOT NULL CHECK( " TABLE_DATA_URL " <> ''), "
+                        TABLE_DATA_USERNAME         " VARCHAR(32)  NOT NULL CHECK( " TABLE_DATA_USERNAME " <> ''), "
+                        TABLE_DATA_PASSWORD         " VARCHAR(32) NOT NULL CHECK( " TABLE_DATA_PASSWORD " <> ''), "
                         TABLE_DATA_DESCRIPTION      " VARCHAR, "
-                        "FOREIGN KEY(account_id) REFERENCES " TABLE_USERS "(id) ON UPDATE CASCADE ON DELETE CASCADE"
+                        "FOREIGN KEY(account_id) REFERENCES " TABLE_USERS "(id) ON UPDATE CASCADE ON DELETE CASCADE "
                         ");");
 
     if(!queryUsers.exec()){
@@ -161,7 +161,7 @@ bool SqliteDBManager::insertIntoUsers(const QString tableName, const QVariantLis
         return true;
 }
 
-bool SqliteDBManager::insertIntoData(const QString tableName, const QVariantList &data)
+bool SqliteDBManager::insertIntoData(const QString tableName, Users *usr, const QVariantList &data)
 {
     /* Запит SQL формується із QVariantList,
      * в який передаються данні для вставки в таблицю.
@@ -173,15 +173,20 @@ bool SqliteDBManager::insertIntoData(const QString tableName, const QVariantList
      * */
     if (tableName == TABLE_DATA){
 //        qDebug() << tableName;
-        query.prepare("INSERT INTO " TABLE_DATA " ( " TABLE_DATA_TITLE ", "
+        query.prepare("INSERT INTO " TABLE_DATA " ( account_id, "
+                      TABLE_DATA_TITLE ", "
                       TABLE_DATA_URL " , "
                       TABLE_DATA_USERNAME " , "
-                      TABLE_DATA_PASSWORD " ) "
-                                            "VALUES (:Title, :Url, :Username, :Password)");
+                      TABLE_DATA_PASSWORD " , "
+                      TABLE_DATA_DESCRIPTION " ) "
+                                            "VALUES (:Acc_id, :Title, :Url, :Username, :Password, :Desc)");
+        query.bindValue(":Acc_id",        usr->id);
         query.bindValue(":Title",        data[0].toString());
         query.bindValue(":Url",        data[1].toString());
         query.bindValue(":Username",        data[2].toString());
         query.bindValue(":Password",        data[3].toString());
+        query.bindValue(":Desc",        data[4].toString());
+//        QString::number(usr->id) + ", "
     }
 
 
@@ -192,7 +197,7 @@ bool SqliteDBManager::insertIntoData(const QString tableName, const QVariantList
         qDebug() << "error insert into " << tableName;
         qDebug() << query.lastError().text();
         qDebug() << query.lastQuery();
-
+        throw query.lastError().text() + " caused by: " + query.lastQuery();
         return false;
     } else
         return true;
