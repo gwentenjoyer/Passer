@@ -90,7 +90,7 @@ void DataWindow::closeEvent (QCloseEvent *event)
 }
 
 QSqlQueryModel* DataWindow::getQueryModel() {
-QSqlQueryModel *sqlmodel = new QSqlQueryModel(this);        // MEMORY LEAK
+QSqlQueryModel *sqlmodel = new QSqlQueryModel(this);        // possible memory leak
 //        QSqlQueryModel *sqlmodel
 //    model->setFilter("account_id = " + currentUser->id);
     sqlmodel->setQuery("SELECT " TABLE_DATA_TITLE ", "
@@ -111,3 +111,9 @@ void DataWindow::updateTableViewModel(QTableView *tb) {
     sqlModel = getQueryModel();
     tb->setModel(sqlModel);
 }
+
+void DataWindow::on_pbRefresh_clicked()
+{
+    updateTableViewModel(ui->tableView);
+}
+

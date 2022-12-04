@@ -30,6 +30,8 @@ private slots:
 
     void on_pbCancel_clicked();
 
+    void on_pbRefresh_clicked();
+
 private:
     Ui::DataWindow *ui;
     Users *currentUser;

@@ -9,7 +9,6 @@ namespace Ui {
 class AddEntry;
 }
 
-//class AddEntry : public QMainWindow
 class AddEntry : public QDialog
 {
     Q_OBJECT
@@ -23,11 +22,13 @@ private slots:
 
     void on_pbAdd_clicked();
 
+
 private:
     SqliteDBManager *db;
     Ui::AddEntry *ui;
     Users *currUser;
     QMainWindow *parentWin;
+
 };
 
 #endif // ADDENTRY_H
