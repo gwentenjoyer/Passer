@@ -17,10 +17,11 @@
 #define TABLE_USERS_PASSWORD            "password"
 
 #define TABLE_DATA                      "data"
-#define TABLE_DATA_TITLE                "users"
+#define TABLE_DATA_TITLE                "title"
 #define TABLE_DATA_URL                  "url"
 #define TABLE_DATA_USERNAME             "username"
 #define TABLE_DATA_PASSWORD             "password"
+#define TABLE_DATA_DESCRIPTION          "description"
 
 struct Users{
     int id;

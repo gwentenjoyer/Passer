@@ -55,7 +55,7 @@ bool SqliteDBManager::restoreDataBase()
             return true;
         }
     } else {
-        qDebug() << "Couldn't restore database " DATABASE_NAME"@"DATABASE_HOSTNAME ".";
+        qDebug() << "Couldn't restore database " DATABASE_NAME "@" DATABASE_HOSTNAME ".";
         return false;
     }
 }
@@ -74,7 +74,7 @@ bool SqliteDBManager::openDataBase()
         qDebug() << "Database " DATABASE_NAME "@" DATABASE_HOSTNAME " has successfully connected.";
         return true;
     } else
-        qDebug() << "Error occured while openning database " DATABASE_NAME"@"DATABASE_HOSTNAME ".";
+        qDebug() << "Error occured while openning database " DATABASE_NAME "@" DATABASE_HOSTNAME ".";
         return false;
 }
 
@@ -95,16 +95,17 @@ bool SqliteDBManager::createTables()
     QSqlQuery queryUsers, queryData;
     queryUsers.prepare("CREATE TABLE " TABLE_USERS " ("
                         "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
-                        TABLE_USERS_USER      " VARCHAR(32) UNIQUE NOT NULL,"
-                        TABLE_USERS_PASSWORD      " VARCHAR(32)            NOT NULL"
+                        TABLE_USERS_USER            " VARCHAR(32) UNIQUE NOT NULL,"
+                        TABLE_USERS_PASSWORD        " VARCHAR(32)            NOT NULL"
                         ");");
     queryData.prepare("CREATE TABLE " TABLE_DATA " ("
                         "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
                         "account_id INTEGER NOT NULL, "
-                        TABLE_DATA_TITLE      " VARCHAR  NOT NULL, "
-                        TABLE_DATA_URL      " VARCHAR NOT NULL, "
-                        TABLE_DATA_USERNAME      " VARCHAR(32)  NOT NULL, "
-                        TABLE_DATA_PASSWORD      " VARCHAR(32) NOT NULL, "
+                        TABLE_DATA_TITLE            " VARCHAR(32)  NOT NULL, "
+                        TABLE_DATA_URL              " VARCHAR NOT NULL, "
+                        TABLE_DATA_USERNAME         " VARCHAR(32)  NOT NULL, "
+                        TABLE_DATA_PASSWORD         " VARCHAR(32) NOT NULL, "
+                        TABLE_DATA_DESCRIPTION      " VARCHAR, "
                         "FOREIGN KEY(account_id) REFERENCES " TABLE_USERS "(id) ON UPDATE CASCADE ON DELETE CASCADE"
                         ");");
 
