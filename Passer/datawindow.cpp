@@ -8,6 +8,7 @@
 #include <QApplication>
 #include <QCloseEvent>
 #include <QSqlQueryModel>
+#include "addentry.h"
 
 //DataWindow::DataWindow(SqliteDBManager *dbIns, Users *currUser, QWidget *parent) :
 DataWindow::DataWindow(SqliteDBManager *dbIns, Users *currUser, QMainWindow *parent) :
@@ -55,7 +56,8 @@ void DataWindow::on_pbQuit_clicked()
 
 void DataWindow::on_pbAdd_clicked()
 {
-
+    AddEntry *addRow = new AddEntry(this);
+    addRow->show();
 }
 
 
