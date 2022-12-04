@@ -10,7 +10,7 @@ int main(int argc, char *argv[])
     SqliteDBManager *sqliteIns = SqliteDBManager::getInstance();
     sqliteIns->connectToDataBase();
     QApplication a(argc, argv);
-    a.setWindowIcon(QIcon("C:\\Users\\1234\\Documents\\Passer\\build-Passer-Desktop_Qt_6_4_0_MinGW_64_bit-Debug\\assets\\winic.ico"));
+    a.setWindowIcon(QIcon("..\\Passer\\winic32x32.ico"));
 //    QObject::connect( a, SIGNAL(lastWindowClosed()), a, a.quit);
     InitDialog w(sqliteIns);
     w.show();
