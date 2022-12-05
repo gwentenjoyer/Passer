@@ -4,12 +4,16 @@
 #include "windowcreate.h"
 #include "sqlitedbmanager.h"
 #include <QFile>
+//#include <QtPlugin>
+
+//Q_IMPORT_PLUGIN(qsqlite)
+
 
 int main(int argc, char *argv[])
 {
+    QApplication a(argc, argv);
     SqliteDBManager *sqliteIns = SqliteDBManager::getInstance();
     sqliteIns->connectToDataBase();
-    QApplication a(argc, argv);
     a.setWindowIcon(QIcon("..\\Passer\\winic32x32.ico"));
 //    QObject::connect( a, SIGNAL(lastWindowClosed()), a, a.quit);
     InitDialog w(sqliteIns);

@@ -9,11 +9,11 @@
 //#include <QSqlError>
 
 #define DATABASE_HOSTNAME               "localhost"
-#define DATABASE_NAME                   "passerdb6.sqlite"
+#define DATABASE_NAME                   "passerdb.sqlite"
 
 #define TABLE_USERS                     "users"
 #define TABLE_USERS_USER                "user"
-#define TABLE_USERS_PASSWORD            "password"
+#define TABLE_USERS_PASSWORD            "password_hash"
 
 #define TABLE_DATA                      "data"
 #define TABLE_DATA_TITLE                "title"
@@ -21,6 +21,9 @@
 #define TABLE_DATA_USERNAME             "username"
 #define TABLE_DATA_PASSWORD             "password"
 #define TABLE_DATA_DESCRIPTION          "description"
+
+
+QString getHexHashOfQString(const QString &tobeHashed);
 
 struct Users{
     int id;

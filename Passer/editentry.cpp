@@ -1,6 +1,7 @@
 #include "editentry.h"
 #include "ui_editentry.h"
 #include <QDebug>
+#include "datawindow.h"
 
 //EditEntry::EditEntry(QWidget *parent) :
 EditEntry::EditEntry(SqliteDBManager *db, const QVariantList &list, QWidget *parent) :
@@ -9,7 +10,10 @@ EditEntry::EditEntry(SqliteDBManager *db, const QVariantList &list, QWidget *par
     db(db),
     list(list)
 {
+
     ui->setupUi(this);
+
+//    connect(this, &closeEvent, parent, &DataWindow::on_pbRefresh_clicked);
     // list[0] is id
     ui->leTitle->setText(list[1].toString());
     ui->leUrl->setText(list[2].toString());

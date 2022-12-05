@@ -113,6 +113,11 @@ void DataWindow::updateTableViewModel(QTableView *tb) {
         delete sqlModel;
     }
     sqlModel = getQueryModel();
+//    sqlModel->QAbstractItemView::setHeaderData(1, QT::Horizontal, QObject::tr("Title");
+//    sqlModel->QAbstractItemView::setHeaderData(2, QT::Horizontal, QObject::tr("URL");
+//    sqlModel->QAbstractItemView::setHeaderData(3, QT::Horizontal, QObject::tr("Username");
+//    sqlModel->QAbstractItemView::setHeaderData(4, QT::Horizontal, QObject::tr("Password");
+//    sqlModel->QAbstractItemView::setHeaderData(5, QT::Horizontal, QObject::tr("Description");
     tb->setModel(sqlModel);
 }
 

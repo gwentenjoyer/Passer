@@ -6,6 +6,7 @@
 #include <QFile>
 #include <QDate>
 #include <QDebug>
+#include <QCryptographicHash>
 //#include <QVector>
 
 SqliteDBManager* SqliteDBManager::instance = nullptr;
@@ -109,7 +110,7 @@ bool SqliteDBManager::createTables()
                         TABLE_DATA_TITLE            " VARCHAR(32) UNIQUE NOT NULL CHECK( " TABLE_DATA_TITLE " <> ''), "
                         TABLE_DATA_URL              " VARCHAR NOT NULL CHECK( " TABLE_DATA_URL " <> ''), "
                         TABLE_DATA_USERNAME         " VARCHAR(32)  NOT NULL CHECK( " TABLE_DATA_USERNAME " <> ''), "
-                        TABLE_DATA_PASSWORD         " VARCHAR(32) NOT NULL CHECK( " TABLE_DATA_PASSWORD " <> ''), "
+                        TABLE_DATA_PASSWORD         " VARCHAR(64) NOT NULL CHECK( " TABLE_DATA_PASSWORD " <> ''), "
                         TABLE_DATA_DESCRIPTION      " VARCHAR, "
                         "FOREIGN KEY(account_id) REFERENCES " TABLE_USERS "(id) ON UPDATE CASCADE ON DELETE CASCADE "
                         ");");
@@ -269,13 +270,11 @@ Users* SqliteDBManager::searchForUser(const QVariantList &data){
         throw (QString)"Fields cannot be empty.";
     }
 
-    query.prepare("SELECT id, user, password"
-                  " FROM " TABLE_USERS " WHERE user = :usr AND password = :pswd;");
-    query.bindValue(":usr", data[0].toString());
-    query.bindValue(":pswd", data[1].toString());
-//        query.bindValue(":usr", usr);
-//        query.bindValue(":pswd", password);
-//    QList<Users> list;
+    query.prepare("SELECT id, " TABLE_USERS_USER " FROM " TABLE_USERS
+                  " WHERE " TABLE_USERS_USER " = :usr AND " TABLE_USERS_PASSWORD "  = :pswd;");
+    query.bindValue(":usr", username);
+    query.bindValue(":pswd", password);
+
     Users *user = nullptr;
 
     if (!query.exec()) {
@@ -297,4 +296,16 @@ Users* SqliteDBManager::searchForUser(const QVariantList &data){
         }
     }
     return user;
+}
+
+//QString getHashOfQString(const QString &tobeHashed){
+QString getHexHashOfQString(const QString &tobeHashed){
+
+    QCryptographicHash returnHash(QCryptographicHash::Algorithm::Sha3_512);
+//    qDebug() << "here: ";
+
+    QByteArray bytes;
+    bytes = returnHash.hash(tobeHashed.toLocal8Bit(), QCryptographicHash::Algorithm::Sha3_512);
+//    qDebug() << QLatin1String(bytes.toHex()) << " and " << bytes.length();
+    return QLatin1String(bytes.toHex());
 }

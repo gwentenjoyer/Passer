@@ -46,6 +46,7 @@ void WindowOpen::on_pbLogin_clicked()
 //    db->connectToDataBase();
     Users *user;
     QVariantList signInInfo;
+    QString hashedPassword;
 //    if(ui->leUsername->text() == "" || ui->lePassword->text() == ""){
 //        qDebug() << "Fields cannot be empty.";
 //        QMessageBox *modalWid = new QMessageBox(this);
@@ -55,8 +56,15 @@ void WindowOpen::on_pbLogin_clicked()
 //    }
 //    else{
     try{
+
+
+        hashedPassword = getHexHashOfQString(ui->lePassword->text());
+//        qDebug() << hashedPassword;
+
         signInInfo.append(ui->leUsername->text());
-        signInInfo.append(ui->lePassword->text());
+        signInInfo.append(hashedPassword);
+
+
     //    db->connectToDataBase();
 //        if(!db->searchForUser(ui->leUsername->text(), ui->lePassword->text())){
         user = db->searchForUser(signInInfo);
