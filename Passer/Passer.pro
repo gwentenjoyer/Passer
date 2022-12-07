@@ -57,8 +57,7 @@ FORMS += \
     datawindow.ui \
     editentry.ui \
     initdialog.ui \
-    windowcreate.ui \
-    windowopen.ui
+    windowcreate.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

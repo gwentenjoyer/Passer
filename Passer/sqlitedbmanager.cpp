@@ -64,9 +64,10 @@ bool SqliteDBManager::openDataBase()
     if(db.open()){
         qDebug() << "Database " DATABASE_NAME "@" DATABASE_HOSTNAME " has successfully connected.";
         return true;
-    } else
+    }
+    else
         qDebug() << "Error occured while openning database " DATABASE_NAME "@" DATABASE_HOSTNAME ".";
-        return false;
+    return false;
 }
 
 void SqliteDBManager::closeDataBase()

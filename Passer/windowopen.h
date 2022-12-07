@@ -7,9 +7,11 @@
 #include <QMessageBox>
 #include <QApplication>
 #include "initdialog.h"
+#include "ui_windowcreate.h"
 
 namespace Ui {
-class WindowOpen;
+//class WindowOpen;
+class WindowCreate;
 }
 
 class WindowOpen : public QMainWindow
@@ -24,10 +26,12 @@ public:
 private slots:
     void on_pbCancel_clicked();
 
-    void on_pbLogin_clicked();
+//    void on_pbLogin_clicked();
+    void on_pbContinue_clicked();
 
 private:
-    Ui::WindowOpen *ui;
+//    Ui::WindowOpen *ui;
+    Ui::WindowCreate *ui;
     SqliteDBManager *db;
     InitDialog *parentWin;
     void closeEvent (QCloseEvent *event);

@@ -30,7 +30,8 @@ void WindowCreate::on_pbCancel_clicked()
 }
 
 
-void WindowCreate::on_pbSignin_clicked()
+void WindowCreate::on_pbContinue_clicked()
+//void WindowCreate::on_pbSignin_clicked()
 {
     UserPublicData *user;
     QString hashedPassword(getHexHashOfQString(ui->lePassword->text()));
@@ -56,3 +57,4 @@ void WindowCreate::closeEvent (QCloseEvent *event)
     event->accept();
     QApplication::quit();
 }
+

@@ -22,7 +22,9 @@ public:
 private slots:
     void on_pbCancel_clicked();
 
-    void on_pbSignin_clicked();
+//    void on_pbSignin_clicked();
+
+    void on_pbContinue_clicked();
 
 private:
     Ui::WindowCreate *ui;

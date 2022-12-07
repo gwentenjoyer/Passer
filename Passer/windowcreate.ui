@@ -69,7 +69,7 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pbSignin">
+       <widget class="QPushButton" name="pbContinue">
         <property name="cursor">
          <cursorShape>PointingHandCursor</cursorShape>
         </property>
@@ -173,7 +173,7 @@
  <tabstops>
   <tabstop>leUsername</tabstop>
   <tabstop>lePassword</tabstop>
-  <tabstop>pbSignin</tabstop>
+  <tabstop>pbContinue</tabstop>
   <tabstop>pbCancel</tabstop>
  </tabstops>
  <resources/>

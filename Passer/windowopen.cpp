@@ -1,21 +1,25 @@
 #include "windowopen.h"
-#include "ui_windowopen.h"
+//#include "ui_windowopen.h"
+#include "ui_windowcreate.h"
+
 #include "initdialog.h"
 #include <iostream>
 #include "datawindow.h"
 #include "sqlitedbmanager.h"
 #include <QMessageBox>
 #include <QCloseEvent>
-
+#include <QPushButton>
 #include "hash.h"
 
 WindowOpen::WindowOpen(InitDialog *parent) :
 //    QMainWindow(parent),
     parentWin(parent),
-    ui(new Ui::WindowOpen),
+    ui(new Ui::WindowCreate),
     db(SqliteDBManager::getInstance())
 {
     ui->setupUi(this);
+    setWindowTitle("Passer - Log into existing account...");
+    ui->pbContinue->setText("Log in");
 }
 
 WindowOpen::~WindowOpen()
@@ -29,8 +33,7 @@ void WindowOpen::on_pbCancel_clicked()
     delete this;
 }
 
-
-void WindowOpen::on_pbLogin_clicked()
+void WindowOpen::on_pbContinue_clicked()
 {
     UserPublicData *user;
     QString hashedPassword(getHexHashOfQString(ui->lePassword->text()));
