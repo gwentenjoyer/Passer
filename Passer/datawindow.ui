@@ -54,6 +54,9 @@
         </property>
         <item row="0" column="0">
          <widget class="QPushButton" name="pbAdd">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
           <property name="text">
            <string>Add</string>
           </property>
@@ -61,6 +64,9 @@
         </item>
         <item row="1" column="0">
          <widget class="QPushButton" name="pbEdit">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
           <property name="text">
            <string>Edit</string>
           </property>
@@ -68,6 +74,9 @@
         </item>
         <item row="2" column="0">
          <widget class="QPushButton" name="pbDelete">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
           <property name="text">
            <string>Delete</string>
           </property>
@@ -75,6 +84,9 @@
         </item>
         <item row="4" column="0">
          <widget class="QPushButton" name="pbRefresh">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
           <property name="text">
            <string>Refresh</string>
           </property>
@@ -115,6 +127,9 @@
         </property>
         <item row="0" column="0">
          <widget class="QPushButton" name="pbCancel">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
           <property name="text">
            <string>Cancel</string>
           </property>
@@ -122,6 +137,9 @@
         </item>
         <item row="1" column="0">
          <widget class="QPushButton" name="pbQuit">
+          <property name="cursor">
+           <cursorShape>PointingHandCursor</cursorShape>
+          </property>
           <property name="text">
            <string>Quit</string>
           </property>

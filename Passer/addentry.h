@@ -14,7 +14,7 @@ class AddEntry : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddEntry(SqliteDBManager *db, Users *currUser, QMainWindow *parent = nullptr);
+    explicit AddEntry(SqliteDBManager *db, UserPublicData *currUser, QMainWindow *parent = nullptr);
     ~AddEntry();
 
 private slots:
@@ -26,7 +26,7 @@ private slots:
 private:
     SqliteDBManager *db;
     Ui::AddEntry *ui;
-    Users *currUser;
+    UserPublicData *currUser;
     QMainWindow *parentWin;
 
 };

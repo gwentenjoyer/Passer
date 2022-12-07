@@ -22,34 +22,32 @@
 #define TABLE_DATA_PASSWORD             "password"
 #define TABLE_DATA_DESCRIPTION          "description"
 
+#include "userinfo.h"
+#include "dbmanager.h"
 
-QString getHexHashOfQString(const QString &tobeHashed);
-
-struct Users{
-    int id;
-    QString username;
-//    QString password;
-};
-
-class SqliteDBManager {
+class SqliteDBManager : public DbManager {
 
 public:
     static SqliteDBManager* getInstance();
-
     void connectToDataBase();
     QSqlDatabase getDB();
-    bool insertIntoUsers(const QString tableName, const QVariantList &data);
-    bool insertIntoData(const QString tableName, Users *usr, const QVariantList &data);
+//    bool insertIntoUsers(const QString tableName, const QVariantList &data);
+//    bool insertIntoData(const QString tableName, Users *usr, const QVariantList &data);
+    bool insert(const UserInfo&);
+//    bool insert(const DataInfo&);
+    bool insert(const UserPublicData *upi,const DataInfo& dataInfo);
     void deleteDataRow(int rowId);
-    Users* searchForUser(const QVariantList &data);
+    UserPublicData* searchForUser(const UserInfo& userInfo);
+//    UserPublicData* searchForUser(const QVariantList &data);
 
-    void updateDataRow(const QVariantList &data);
+//    void updateDataRow(const QVariantList &data);
+    void updateDataRow(const DataInfo &data);
 
 
     //    Users* searchForUser(const QString user, const QString password);
     //    Users* searchForUser(const QVariantList &data);
 
-    ~SqliteDBManager();
+    virtual ~SqliteDBManager() override;
 
 private:
     QSqlDatabase    db;

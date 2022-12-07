@@ -148,6 +148,9 @@
     <layout class="QHBoxLayout" name="horizontalLayout" stretch="30,15,30">
      <item>
       <widget class="QPushButton" name="pbCancel">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="text">
         <string>Cancel</string>
        </property>
@@ -168,6 +171,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="pbEdit">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="text">
         <string>Edit</string>
        </property>

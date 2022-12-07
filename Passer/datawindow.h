@@ -19,7 +19,7 @@ class DataWindow : public QMainWindow
 
 public:
 //    explicit DataWindow(SqliteDBManager *dbIns, Users *currUser, QWidget *parent = nullptr);
-    explicit DataWindow(SqliteDBManager *dbIns, Users *currUser, QMainWindow *parent = nullptr);
+    explicit DataWindow(SqliteDBManager *dbIns, UserPublicData *currUser, QMainWindow *parent = nullptr);
     ~DataWindow();
 //    friend AddEntry::~AddEntry();
 
@@ -41,7 +41,7 @@ private slots:
 
 private:
     Ui::DataWindow *ui;
-    Users *currentUser;
+    UserPublicData *currentUser;
     QMainWindow *parentWin;
     SqliteDBManager *db;
     QSqlQueryModel *sqlModel;
@@ -59,7 +59,8 @@ private:
     int selectedRow;
 
     // tableView and taableSelectedRowDataId
-    QVariantList getInfoFromDataSelectedRow(QTableView *table, int row);
+//    QVariantList getInfoFromDataSelectedRow(QTableView *table, int row);
+    DataInfo getInfoFromDataSelectedRow(QTableView *table);
 
 };
 

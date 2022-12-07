@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>562</width>
-    <height>372</height>
+    <height>414</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -118,6 +118,9 @@
      </property>
      <item>
       <widget class="QPushButton" name="pbCancel">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="text">
         <string>Cancel</string>
        </property>
@@ -138,6 +141,9 @@
      </item>
      <item>
       <widget class="QPushButton" name="pbAdd">
+       <property name="cursor">
+        <cursorShape>PointingHandCursor</cursorShape>
+       </property>
        <property name="text">
         <string>Add</string>
        </property>
@@ -224,6 +230,15 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>leTitle</tabstop>
+  <tabstop>leUrl</tabstop>
+  <tabstop>leUsername</tabstop>
+  <tabstop>lePassword</tabstop>
+  <tabstop>leDescription</tabstop>
+  <tabstop>pbAdd</tabstop>
+  <tabstop>pbCancel</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

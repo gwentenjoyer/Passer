@@ -5,8 +5,10 @@
 #include <QMessageBox>
 #include "datawindow.h"
 
+#include "datainfo.h"
+
 //AddEntry::AddEntry(QWidget *parent) :
-AddEntry::AddEntry(SqliteDBManager *db, Users *currUser, QMainWindow *parent) :
+AddEntry::AddEntry(SqliteDBManager *db, UserPublicData *currUser, QMainWindow *parent) :
 //    QMainWindow(parent),
     parentWin(parent),
     db(db),
@@ -35,15 +37,21 @@ void AddEntry::on_pbCancel_clicked()
 void AddEntry::on_pbAdd_clicked()
 {
     // if()
-    QVariantList data;
+//    QVariantList data;
+    DataInfo data(currUser->id,
+            ui->leTitle->text(),
+            ui->leUrl->text(),
+            ui->leUsername->text(),
+            ui->lePassword->text(),
+            ui->leDescription->text());
     try{
-        data.append(ui->leTitle->text());
-        data.append(ui->leUrl->text());
-        data.append(ui->leUsername->text());
-        data.append(ui->lePassword->text());
-        data.append(ui->leDescription->text());
-        db->insertIntoData(TABLE_DATA, currUser, data);
-
+//        data.append(ui->leTitle->text());
+//        data.append(ui->leUrl->text());
+//        data.append(ui->leUsername->text());
+//        data.append(ui->lePassword->text());
+//        data.append(ui->leDescription->text());
+//        db->insertIntoData(TABLE_DATA, currUser, data);
+        db->insert(currUser, data);
         delete this;
     }
     catch(QString err){

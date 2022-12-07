@@ -27,20 +27,28 @@ RC_FILE = passer.rc
 
 SOURCES += \
     addentry.cpp \
+    datainfo.cpp \
     datawindow.cpp \
+    dbmanager.cpp \
     editentry.cpp \
+    hash.cpp \
     main.cpp \
     initdialog.cpp \
     sqlitedbmanager.cpp \
+    userinfo.cpp \
     windowcreate.cpp \
     windowopen.cpp
 
 HEADERS += \
     addentry.h \
+    datainfo.h \
     datawindow.h \
+    dbmanager.h \
     editentry.h \
+    hash.h \
     initdialog.h \
     sqlitedbmanager.h \
+    userinfo.h \
     windowcreate.h \
     windowopen.h
 

@@ -10,6 +10,9 @@
     <height>333</height>
    </rect>
   </property>
+  <property name="cursor">
+   <cursorShape>ArrowCursor</cursorShape>
+  </property>
   <property name="windowTitle">
    <string>Passer</string>
   </property>
@@ -31,6 +34,9 @@
    </property>
    <item row="2" column="1">
     <widget class="QPushButton" name="pbExit">
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="text">
       <string>Exit</string>
      </property>
@@ -38,8 +44,23 @@
    </item>
    <item row="0" column="1">
     <widget class="QPushButton" name="pbOpen">
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="text">
       <string>Log into existing account...</string>
+     </property>
+     <property name="checkable">
+      <bool>false</bool>
+     </property>
+     <property name="checked">
+      <bool>false</bool>
+     </property>
+     <property name="default">
+      <bool>false</bool>
+     </property>
+     <property name="flat">
+      <bool>false</bool>
      </property>
     </widget>
    </item>
@@ -58,6 +79,9 @@
    </item>
    <item row="1" column="1">
     <widget class="QPushButton" name="pbCreate">
+     <property name="cursor">
+      <cursorShape>PointingHandCursor</cursorShape>
+     </property>
      <property name="text">
       <string>Create new new account...</string>
      </property>
@@ -78,6 +102,11 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>pbOpen</tabstop>
+  <tabstop>pbCreate</tabstop>
+  <tabstop>pbExit</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

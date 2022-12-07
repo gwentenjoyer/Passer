@@ -10,9 +10,10 @@
 #include <QSqlQueryModel>
 #include "addentry.h"
 #include "editentry.h"
+#include "datainfo.h"
 
 //DataWindow::DataWindow(SqliteDBManager *dbIns, Users *currUser, QWidget *parent) :
-DataWindow::DataWindow(SqliteDBManager *dbIns, Users *currUser, QMainWindow *parent) :
+DataWindow::DataWindow(SqliteDBManager *dbIns, UserPublicData *currUser, QMainWindow *parent) :
 //    QMainWindow(parent),
     parentWin(parent),
     ui(new Ui::DataWindow),
@@ -150,20 +151,36 @@ void DataWindow::on_tableView_clicked(const QModelIndex &index)
 void DataWindow::on_pbEdit_clicked()
 {
     if(ui->tableView->currentIndex().isValid()){
-        EditEntry *editWin = new EditEntry(db, getInfoFromDataSelectedRow(ui->tableView, selectedRow), this);
+        EditEntry *editWin = new EditEntry(db, getInfoFromDataSelectedRow(ui->tableView), this);
         editWin->show();
     }
 //    selectedRow = 0;
 //    getInfoFromDataSelectedRow(ui->tableView, selectedRow);
 }
 
-QVariantList DataWindow::getInfoFromDataSelectedRow(QTableView *table, int row){
-    QVariantList lst;
+//QVariantList DataWindow::getInfoFromDataSelectedRow(QTableView *table, int row){
+//    QVariantList lst;
+//    QAbstractItemModel *model = table->model();
+//    int columns = model->columnCount();
+//    for (int i = 0; i < columns; ++i){
+//        lst.append(model->index(selectedRow, i).data().toString());
+////            qDebug() << lst[i];
+//    }
+//    return lst;
+//}
+DataInfo DataWindow::getInfoFromDataSelectedRow(QTableView *table){
+//    QVariantList lst;
     QAbstractItemModel *model = table->model();
-    int columns = model->columnCount();
-    for (int i = 0; i < columns; ++i){
-        lst.append(model->index(selectedRow, i).data().toString());
+    DataInfo data(model->index(selectedRow, 0).data().toInt(),
+                  model->index(selectedRow, 1).data().toString(),
+                  model->index(selectedRow, 2).data().toString(),
+                  model->index(selectedRow, 3).data().toString(),
+                  model->index(selectedRow, 4).data().toString(),
+                  model->index(selectedRow, 5).data().toString());
+//    int columns = model->columnCount();
+//    for (int i = 0; i < columns; ++i){
+//        lst.append(model->index(selectedRow, i).data().toString());
 //            qDebug() << lst[i];
-    }
-    return lst;
+//    }
+    return data;
 }

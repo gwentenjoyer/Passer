@@ -7,6 +7,8 @@
 #include <QMessageBox>
 #include <QCloseEvent>
 
+#include "hash.h"
+
 WindowOpen::WindowOpen(SqliteDBManager *dbIns, InitDialog *parent) :
 //    QMainWindow(parent),
     parentWin(parent),
@@ -44,9 +46,10 @@ void WindowOpen::on_pbLogin_clicked()
 //    users->getInstance();
 //    users->connectToDataBase("mybdor.sqlite", "localhost");
 //    db->connectToDataBase();
-    Users *user;
-    QVariantList signInInfo;
-    QString hashedPassword;
+    UserPublicData *user;
+//    QVariantList signInInfo;
+    QString hashedPassword(getHexHashOfQString(ui->lePassword->text()));
+    UserInfo userInfo(ui->leUsername->text(), hashedPassword);
 //    if(ui->leUsername->text() == "" || ui->lePassword->text() == ""){
 //        qDebug() << "Fields cannot be empty.";
 //        QMessageBox *modalWid = new QMessageBox(this);
@@ -58,16 +61,17 @@ void WindowOpen::on_pbLogin_clicked()
     try{
 
 
-        hashedPassword = getHexHashOfQString(ui->lePassword->text());
+//        hashedPassword = getHexHashOfQString(ui->lePassword->text());
 //        qDebug() << hashedPassword;
 
-        signInInfo.append(ui->leUsername->text());
-        signInInfo.append(hashedPassword);
+//        signInInfo.append(ui->leUsername->text());
+//        signInInfo.append(hashedPassword);
 
 
     //    db->connectToDataBase();
 //        if(!db->searchForUser(ui->leUsername->text(), ui->lePassword->text())){
-        user = db->searchForUser(signInInfo);
+//        user = db->searchForUser(signInInfo);
+        user = db->searchForUser(userInfo);
 //        if(!(user = db->searchForUser(signInInfo))){
 //            qDebug() << "Cannot find user with this input data.";
 //            QMessageBox *modalWid = new QMessageBox(this);

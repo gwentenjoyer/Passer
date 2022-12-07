@@ -5,6 +5,10 @@
 #include <QVariantList>
 #include <QMessageBox>
 
+#include "hash.h"
+#include "datainfo.h"
+#include "userinfo.h"
+
 //WindowCreate::WindowCreate(SqliteDBManager *dbIns, QWidget *parent) :
 WindowCreate::WindowCreate(SqliteDBManager *dbIns, InitDialog *parent) :
 //    QMainWindow(parent),
@@ -30,9 +34,10 @@ void WindowCreate::on_pbCancel_clicked()
 
 void WindowCreate::on_pbSignin_clicked()
 {
-    QVariantList signInInfo;
-    Users *user;
-    QString hashedPassword;
+//    QVariantList signInInfo;
+    UserPublicData *user;
+    QString hashedPassword(getHexHashOfQString(ui->lePassword->text()));
+    UserInfo userInfo(ui->leUsername->text(), hashedPassword);
 //    if(ui->leUsername->text() == "" || ui->lePassword->text() == ""){
 //        qDebug() << "Fields cannot be empty.";
 //        QMessageBox *modalWid = new QMessageBox(this);
@@ -44,20 +49,23 @@ void WindowCreate::on_pbSignin_clicked()
         try{
 
 
-        hashedPassword = getHexHashOfQString(ui->lePassword->text());
+//        hashedPassword = getHexHashOfQString(ui->lePassword->text());
 //        qDebug() << hashedPassword;
 
-        signInInfo.append(ui->leUsername->text());
+//        signInInfo.append(ui->leUsername->text());
 //        signInInfo.append(ui->lePassword->text());
-        signInInfo.append(hashedPassword);
+//        signInInfo.append(hashedPassword);
 
 
     //    db->connectToDataBase();
-        db->insertIntoUsers(TABLE_USERS, signInInfo);
-        user = db->searchForUser(signInInfo);
+//        db->insertIntoUsers(TABLE_USERS, signInInfo);
+
+        db->insert(userInfo);
+        user = db->searchForUser(userInfo);
         DataWindow *dw = new DataWindow(db, user, this);
         dw->show();
-        hide();}
+        hide();
+    }
         catch(QString err){
             QMessageBox *modalWid = new QMessageBox(this);
             modalWid->setModal(true);
