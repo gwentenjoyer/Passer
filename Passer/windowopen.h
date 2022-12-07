@@ -17,9 +17,8 @@ class WindowOpen : public QMainWindow
     Q_OBJECT
 
 public:
-//    explicit WindowOpen(SqliteDBManager *dbIns, QWidget *parent = nullptr);
-    explicit WindowOpen(SqliteDBManager *dbIns, InitDialog *parent = nullptr);
-//    explicit WindowOpen(QWidget *parent = nullptr);
+    explicit WindowOpen(InitDialog *parent = nullptr);
+
     ~WindowOpen();
 
 private slots:

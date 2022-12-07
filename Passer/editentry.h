@@ -15,8 +15,7 @@ class EditEntry : public QDialog
     Q_OBJECT
 
 public:
-//    explicit EditEntry(SqliteDBManager *db, const QVariantList &list, QWidget *parent = nullptr);DataInfo
-        explicit EditEntry(SqliteDBManager *db, const DataInfo &, QWidget *parent = nullptr);
+    explicit EditEntry(const DataInfo &, QWidget *parent = nullptr);
     ~EditEntry();
 
 private slots:
@@ -26,9 +25,7 @@ private slots:
 
 private:
     Ui::EditEntry *ui;
-//    QVariantList list;
     DataInfo dataInfo;
-    SqliteDBManager *db;
 };
 
 #endif // EDITENTRY_H

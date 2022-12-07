@@ -2,8 +2,8 @@
 #define ADDENTRY_H
 
 #include <QMainWindow>
-#include "sqlitedbmanager.h"
 #include <QDialog>
+#include "userinfo.h"
 
 namespace Ui {
 class AddEntry;
@@ -14,7 +14,7 @@ class AddEntry : public QDialog
     Q_OBJECT
 
 public:
-    explicit AddEntry(SqliteDBManager *db, UserPublicData *currUser, QMainWindow *parent = nullptr);
+    explicit AddEntry(UserPublicData *currUser, QMainWindow *parent = nullptr);
     ~AddEntry();
 
 private slots:
@@ -24,7 +24,6 @@ private slots:
 
 
 private:
-    SqliteDBManager *db;
     Ui::AddEntry *ui;
     UserPublicData *currUser;
     QMainWindow *parentWin;

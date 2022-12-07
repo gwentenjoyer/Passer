@@ -7,7 +7,6 @@
 #include <QDate>
 #include <QDebug>
 #include <QCryptographicHash>
-//#include <QVector>
 
 SqliteDBManager* SqliteDBManager::instance = nullptr;
 
@@ -29,16 +28,8 @@ SqliteDBManager* SqliteDBManager::getInstance()
     return instance;
 }
 
-
-
-
-/* Методи для підключення до бази даних
- * */
 void SqliteDBManager::connectToDataBase()
 {
-    /* Перед підключенням до бази даних виконуємо перевірку на її існування.
-     * В залежності від результату виконуємо відкриття бази даних або її відновлення
-     * */
     if(QFile(DATABASE_NAME).exists()){
         this->openDataBase();
     } else {
@@ -51,8 +42,6 @@ QSqlDatabase SqliteDBManager::getDB()
     return db;
 }
 
-/* Методи відновлення бази даних
- * */
 bool SqliteDBManager::restoreDataBase()
 {
     if(this->openDataBase()){
@@ -67,13 +56,8 @@ bool SqliteDBManager::restoreDataBase()
     }
 }
 
-/* Методи для відкриття бази даних
- * */
 bool SqliteDBManager::openDataBase()
 {
-    /* База даних відкривається по вказаному шляху
-     * і імені бази даних, якщо вона існує
-     * */
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setHostName(DATABASE_HOSTNAME);
     db.setDatabaseName(DATABASE_NAME);
@@ -85,20 +69,13 @@ bool SqliteDBManager::openDataBase()
         return false;
 }
 
-/* Метод закриття бази даних
- * */
 void SqliteDBManager::closeDataBase()
 {
     db.close();
 }
 
-/* Метод для створення таблиці в базі даних
- * */
 bool SqliteDBManager::createTables()
 {
-    /* В даному випадку використовується фурмування сирого SQL-запиту
-     * з наступним його виконанням.
-     * */
     QSqlQuery queryUsers, queryData;
     queryUsers.prepare("CREATE TABLE " TABLE_USERS " ("
                         "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
@@ -131,71 +108,19 @@ bool SqliteDBManager::createTables()
     return true;
 }
 
-/* Метод для вставки записів у базу даних
- * */
-
-//bool SqliteDBManager::insertIntoUsers(const QString tableName, const QVariantList &data)
-//{
-//    /* Запит SQL формується із QVariantList,
-//     * в який передаються данні для вставки в таблицю.
-//     * */
-//    QSqlQuery query;
-//    /* Спочатку SQL-запит формується з ключами,
-//     * які потім зв'язуються методом bindValue
-//     * для підставки даних із QVariantList
-//     * */
-//    QString username = data[0].toString(), password = data[1].toString();
-//    if(username == "" || password == ""){
-//        throw (QString)"Fields cannot be empty.";
-//    }
-
-//    if (tableName == TABLE_USERS){
-////        qDebug() << tableName;
-//        query.prepare("INSERT INTO " TABLE_USERS " ( " TABLE_USERS_USER ", "
-//                      TABLE_USERS_PASSWORD " ) "
-//                                            "VALUES (:User, :Password )");
-//        query.bindValue(":User",        username);
-//        query.bindValue(":Password",       password);
-//    }
-
-//    // Після чого виконується запит методом exec()
-//    if(!query.exec()){
-//        qDebug() << "error insert into " << tableName;
-//        qDebug() << query.lastError().text();
-//        qDebug() << query.lastQuery();
-//        throw query.lastError().text();
-////        return false;
-//    } else
-//        return true;
-//}
-
 bool SqliteDBManager::insert(const UserInfo& userLoginData) {
-//bool SqliteDBManager::insertIntoUsers(const QString tableName, const QVariantList &data)
 
-    /* Запит SQL формується із QVariantList,
-     * в який передаються данні для вставки в таблицю.
-     * */
     QSqlQuery query;
-    /* Спочатку SQL-запит формується з ключами,
-     * які потім зв'язуються методом bindValue
-     * для підставки даних із QVariantList
-     * */
-//    QString username = data[0].toString(), password = data[1].toString();
-//    if(username == "" || password == ""){
     if(userLoginData.getUsername() == "" || userLoginData.getPassword() == ""){
         throw (QString)"Fields cannot be empty.";
     }
 
-//    if (tableName == TABLE_USERS){
-//        qDebug() << tableName;
     query.prepare("INSERT INTO " TABLE_USERS " ( " TABLE_USERS_USER ", "
                   TABLE_USERS_PASSWORD " ) "
                                         "VALUES (:User, :Password )");
     query.bindValue(":User",        userLoginData.getUsername());
     query.bindValue(":Password",       userLoginData.getPassword());
-//    }
 
-    // Після чого виконується запит методом exec()
     if(!query.exec()){
         qDebug() << "error insert into " << TABLE_USERS;
         qDebug() << query.lastError().text();
@@ -206,42 +131,24 @@ bool SqliteDBManager::insert(const UserInfo& userLoginData) {
         return true;
 }
 
-bool SqliteDBManager::insert(const UserPublicData *upi,const DataInfo& dataInfo)
-//bool SqliteDBManager::insertIntoData(const QString tableName, Users *usr, const QVariantList &data)
-{
+bool SqliteDBManager::insert(const UserPublicData *upi, const DataInfo& dataInfo) {
     QSqlQuery query;
 
-//    if (tableName == TABLE_DATA){
-//        qDebug() << tableName;
-        query.prepare("INSERT INTO " TABLE_DATA " ( account_id, "
-                      TABLE_DATA_TITLE ", "
-                      TABLE_DATA_URL " , "
-                      TABLE_DATA_USERNAME " , "
-                      TABLE_DATA_PASSWORD " , "
-                      TABLE_DATA_DESCRIPTION " ) "
-                                            "VALUES (:Acc_id, :Title, :Url, :Username, :Password, :Desc)");
-//        query.bindValue(":Acc_id",        usr->id);
-//        query.bindValue(":Title",        data[0].toString());
-//        query.bindValue(":Url",        data[1].toString());
-//        query.bindValue(":Username",        data[2].toString());
-//        query.bindValue(":Password",        data[3].toString());
-//        query.bindValue(":Desc",        data[4].toString());
+    query.prepare("INSERT INTO " TABLE_DATA " ( account_id, "
+                  TABLE_DATA_TITLE ", "
+                  TABLE_DATA_URL " , "
+                  TABLE_DATA_USERNAME " , "
+                  TABLE_DATA_PASSWORD " , "
+                  TABLE_DATA_DESCRIPTION " ) "
+                                        "VALUES (:Acc_id, :Title, :Url, :Username, :Password, :Desc)");
+    query.bindValue(":Acc_id",        upi->id);
+    query.bindValue(":Title",        dataInfo.getTitle());
+    query.bindValue(":Url",        dataInfo.getUrl());
+    query.bindValue(":Username",        dataInfo.getUsername());
+    query.bindValue(":Password",        dataInfo.getPassword());
+    query.bindValue(":Desc",        dataInfo.getDescription());
 
-//        query.bindValue(":Acc_id",        dataInfo.getId());
-        query.bindValue(":Acc_id",        upi->id);
-        query.bindValue(":Title",        dataInfo.getTitle());
-        query.bindValue(":Url",        dataInfo.getUrl());
-        query.bindValue(":Username",        dataInfo.getUsername());
-        query.bindValue(":Password",        dataInfo.getPassword());
-        query.bindValue(":Desc",        dataInfo.getDescription());
-//        QString::number(usr->id) + ", "
-//    }
-
-
-
-
-    // Після чого виконується запит методом exec()
-    if(!query.exec()){
+    if(!query.exec()) {
         qDebug() << "error insert into " << TABLE_DATA;
         qDebug() << query.lastError().text();
         qDebug() << query.lastQuery();
@@ -252,8 +159,6 @@ bool SqliteDBManager::insert(const UserPublicData *upi,const DataInfo& dataInfo)
 }
 
 void SqliteDBManager::deleteDataRow(int rowId) {
-//        QSqlQueryModel *sqlmodel
-//    model->setFilter("account_id = " + currentUser->id);
     QSqlQuery query;
     query.prepare("DELETE FROM " TABLE_DATA " WHERE id = " + QString::number(rowId) + ";");
 
@@ -266,27 +171,9 @@ void SqliteDBManager::deleteDataRow(int rowId) {
     qDebug() << "Successfully deleted row with id = " + QString::number(rowId);
 }
 
-//void SqliteDBManager::updateDataRow(const QVariantList &data) {
 void SqliteDBManager::updateDataRow(const DataInfo &data){
-//        QSqlQueryModel *sqlmodel
-//    model->setFilter("account_id = " + currentUser->id);
     QSqlQuery query;
-//    qDebug() << data.getTitle();
-//    qDebug() << data.getUrl();
-//    qDebug() << data.getUsername();
-//    qDebug() << data.getPassword();
-//    qDebug() << data.getDescription();
 
-//    for(int i = 0; i < 6; ++i){
-//        qDebug() << data[i];
-//    }
-//    query.prepare("UPDATE  " TABLE_DATA
-//                  " SET " TABLE_DATA_TITLE " = '" + data[1].toString() + "', "
-//                  " " TABLE_DATA_URL " = '" + data[2].toString() + "', "
-//                  " " TABLE_DATA_USERNAME " = '" + data[3].toString() + "', "
-//                  " " TABLE_DATA_PASSWORD " = '" + data[4].toString() + "', "
-//                  " " TABLE_DATA_DESCRIPTION " = '" + data[5].toString() + "' "
-//                  " WHERE id = " + data[0].toString() + ";");
     query.prepare("UPDATE  " TABLE_DATA
                   " SET " TABLE_DATA_TITLE " = '" + data.getTitle() + "', "
                   " " TABLE_DATA_URL " = '" + data.getUrl() + "', "
@@ -294,18 +181,6 @@ void SqliteDBManager::updateDataRow(const DataInfo &data){
                   " " TABLE_DATA_PASSWORD " = '" + data.getPassword() + "', "
                   " " TABLE_DATA_DESCRIPTION " = '" + data.getDescription() + "' "
                   " WHERE id = " + QString::number(data.getId()) + ";");
-//    query.prepare("UPDATE  " TABLE_DATA
-//                  " SET " TABLE_DATA_TITLE " = :Title, "
-//                  " SET " TABLE_DATA_URL " = :Url, "
-//                  " SET " TABLE_DATA_USERNAME " = :Username, "
-//                  " SET " TABLE_DATA_PASSWORD " = :Password, "
-//                  " SET " TABLE_DATA_DESCRIPTION " = :Desc, "
-//                  " WHERE id = " + data[0].toString() + ";");
-//    query.bindValue(":Title",        data[1].toString());
-//    query.bindValue(":Url",        data[2].toString());
-//    query.bindValue(":Username",        data[3].toString());
-//    query.bindValue(":Password",        data[4].toString());
-//    query.bindValue(":Desc",        data[5].toString());
 
     if(!query.exec()){
         qDebug() << "error updating " << TABLE_DATA;
@@ -316,16 +191,11 @@ void SqliteDBManager::updateDataRow(const DataInfo &data){
     qDebug() << "Successfully updated row with id = " << data.getId();
 }
 
-//    Users* searchForUser(const QString usr, const QString password){
-//UserPublicData* SqliteDBManager::searchForUser(const QVariantList &data){
 UserPublicData* SqliteDBManager::searchForUser(const UserInfo& userInfo) {
     QSqlQuery query;
 
-//    QString username = data[0].toString(), password  = data[1].toString();
-//    if(username == "" || password == ""){
     if(userInfo.getUsername() == "" || userInfo.getPassword() == "")
         throw (QString)"Fields cannot be empty.";
-//    }
 
     query.prepare("SELECT id, " TABLE_USERS_USER " FROM " TABLE_USERS
                   " WHERE " TABLE_USERS_USER " = :usr AND " TABLE_USERS_PASSWORD "  = :pswd;");
@@ -345,8 +215,6 @@ UserPublicData* SqliteDBManager::searchForUser(const UserInfo& userInfo) {
             user = new UserPublicData;       // POSSIBLE MEMORY LEAK
             user->id = query.value("id").toInt();
             user->username = query.value("user").toString();
-//            user->password = query.value("password").toString();
-//            list.append(user);
         } else {
             qDebug () << "Data not found";
             throw (QString)"Cannot find user with this input data.";

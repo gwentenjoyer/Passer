@@ -2,11 +2,7 @@
 #define DATABASE_H
 
 #include <QSqlDatabase>
-#include <QVariantList>
 
-//#include <QSqlQuery>
-//#include <QDebug>
-//#include <QSqlError>
 
 #define DATABASE_HOSTNAME               "localhost"
 #define DATABASE_NAME                   "passerdb.sqlite"
@@ -31,21 +27,11 @@ public:
     static SqliteDBManager* getInstance();
     void connectToDataBase();
     QSqlDatabase getDB();
-//    bool insertIntoUsers(const QString tableName, const QVariantList &data);
-//    bool insertIntoData(const QString tableName, Users *usr, const QVariantList &data);
     bool insert(const UserInfo&);
-//    bool insert(const DataInfo&);
     bool insert(const UserPublicData *upi,const DataInfo& dataInfo);
     void deleteDataRow(int rowId);
     UserPublicData* searchForUser(const UserInfo& userInfo);
-//    UserPublicData* searchForUser(const QVariantList &data);
-
-//    void updateDataRow(const QVariantList &data);
     void updateDataRow(const DataInfo &data);
-
-
-    //    Users* searchForUser(const QString user, const QString password);
-    //    Users* searchForUser(const QVariantList &data);
 
     virtual ~SqliteDBManager() override;
 

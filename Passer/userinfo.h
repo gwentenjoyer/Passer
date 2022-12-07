@@ -6,7 +6,6 @@
 struct UserPublicData {
     int id;
     QString username;
-//    QString password;
 };
 
 class UserInfo{

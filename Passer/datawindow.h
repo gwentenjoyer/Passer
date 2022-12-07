@@ -18,11 +18,8 @@ class DataWindow : public QMainWindow
     Q_OBJECT
 
 public:
-//    explicit DataWindow(SqliteDBManager *dbIns, Users *currUser, QWidget *parent = nullptr);
-    explicit DataWindow(SqliteDBManager *dbIns, UserPublicData *currUser, QMainWindow *parent = nullptr);
+    explicit DataWindow(UserPublicData *currUser, QMainWindow *parent = nullptr);
     ~DataWindow();
-//    friend AddEntry::~AddEntry();
-
 
 private slots:
     void on_pbQuit_clicked();
@@ -48,18 +45,12 @@ private:
 
     void closeEvent (QCloseEvent *event);
 
-//    inline int getDataId(QTableView *table) const{
-//        return ui->table->model()->data(ui->table->model()->index(index.row(),0)).toInt();
-//    }
-
     QSqlQueryModel* getQueryModel();
     void updateTableViewModel(QTableView *tb);
 
     int tableSelectedRowDataId;
     int selectedRow;
 
-    // tableView and taableSelectedRowDataId
-//    QVariantList getInfoFromDataSelectedRow(QTableView *table, int row);
     DataInfo getInfoFromDataSelectedRow(QTableView *table);
 
 };

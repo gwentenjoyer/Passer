@@ -15,9 +15,8 @@ class WindowCreate : public QMainWindow
     Q_OBJECT
 
 public:
-//    explicit WindowCreate(SqliteDBManager *dbIns, QWidget *parent = nullptr);
-    explicit WindowCreate(SqliteDBManager *dbIns, InitDialog *parent = nullptr);
-//    explicit WindowCreate(QWidget *parent = nullptr);
+    explicit WindowCreate(InitDialog *parent = nullptr);
+
     ~WindowCreate();
 
 private slots:
