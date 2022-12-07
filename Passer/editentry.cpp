@@ -1,5 +1,5 @@
 #include "editentry.h"
-#include "ui_editentry.h"
+#include "ui_dataentry.h"
 #include <QDebug>
 #include "datawindow.h"
 
@@ -10,7 +10,7 @@ EditEntry::EditEntry(const DataInfo &dataInfo, QWidget *parent)
 {
 
     ui->setupUi(this);
-
+    setWindowTitle("Edit entry...");
     ui->leTitle->setText(dataInfo.getTitle());
     ui->leUrl->setText(dataInfo.getUrl());
     ui->leUsername->setText(dataInfo.getUsername());
@@ -29,7 +29,8 @@ void EditEntry::on_pbCancel_clicked()
 }
 
 
-void EditEntry::on_pbEdit_clicked()
+//void EditEntry::on_pbEdit_clicked()
+void EditEntry::on_pbProceed_clicked()
 {
     dataInfo.setTitle(ui->leTitle->text());
     dataInfo.setUrl(ui->leUrl->text());

@@ -53,9 +53,8 @@ HEADERS += \
     windowopen.h
 
 FORMS += \
-    addentry.ui \
+    dataentry.ui \
     datawindow.ui \
-    editentry.ui \
     initdialog.ui \
     windowcreate.ui
 

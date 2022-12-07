@@ -1,5 +1,5 @@
 #include "addentry.h"
-#include "ui_addentry.h"
+#include "ui_dataentry.h"
 #include <QString>
 #include <QVariantList>
 #include <QMessageBox>
@@ -12,9 +12,11 @@ AddEntry::AddEntry(UserPublicData *currUser, QMainWindow *parent)
 //    QMainWindow(parent)
     : parentWin(parent)
     , currUser(currUser)
-    , ui(new Ui::AddEntry)
+    , ui(new Ui::EditEntry)
 {
     ui->setupUi(this);
+    setWindowTitle("Add new entry...");
+    ui->pbProceed->setText("Add");
     setModal(true);
 //    hide(); show();
 }
@@ -29,7 +31,8 @@ void AddEntry::on_pbCancel_clicked()
     delete this;
 }
 
-void AddEntry::on_pbAdd_clicked()
+//void AddEntry::on_pbAdd_clicked()
+void AddEntry::on_pbProceed_clicked()
 {
     DataInfo data(currUser->id,
             ui->leTitle->text(),

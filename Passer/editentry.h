@@ -21,7 +21,8 @@ public:
 private slots:
     void on_pbCancel_clicked();
 
-    void on_pbEdit_clicked();
+//    void on_pbEdit_clicked();
+    void on_pbProceed_clicked();
 
 private:
     Ui::EditEntry *ui;

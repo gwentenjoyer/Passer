@@ -4,9 +4,10 @@
 #include <QMainWindow>
 #include <QDialog>
 #include "userinfo.h"
+#include "ui_dataentry.h"
 
 namespace Ui {
-class AddEntry;
+class EditEntry;
 }
 
 class AddEntry : public QDialog
@@ -20,14 +21,12 @@ public:
 private slots:
     void on_pbCancel_clicked();
 
-    void on_pbAdd_clicked();
-
+    void on_pbProceed_clicked();
 
 private:
-    Ui::AddEntry *ui;
+    Ui::EditEntry *ui;
     UserPublicData *currUser;
     QMainWindow *parentWin;
-
 };
 
 #endif // ADDENTRY_H
