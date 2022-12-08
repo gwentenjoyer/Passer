@@ -47,6 +47,7 @@ HEADERS += \
     editentry.h \
     hash.h \
     initdialog.h \
+    passerclipboard.h \
     sqlitedbmanager.h \
     userinfo.h \
     windowcreate.h \
@@ -56,7 +57,7 @@ FORMS += \
     dataentry.ui \
     datawindow.ui \
     initdialog.ui \
-    windowcreate.ui
+    windowlogin.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

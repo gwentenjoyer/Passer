@@ -1,5 +1,5 @@
 #include "windowcreate.h"
-#include "ui_windowcreate.h"
+#include "ui_windowlogin.h"
 #include "initdialog.h"
 #include "datawindow.h"
 #include <QVariantList>
@@ -12,7 +12,7 @@
 WindowCreate::WindowCreate(InitDialog *parent) :
 //    QMainWindow(parent),
     parentWin(parent),
-    ui(new Ui::WindowCreate),
+    ui(new Ui::WindowLogin),
     db(SqliteDBManager::getInstance())
 {
     ui->setupUi(this);
@@ -41,7 +41,9 @@ void WindowCreate::on_pbContinue_clicked()
         db->insert(userInfo);
         user = db->searchForUser(userInfo);
         DataWindow *dw = new DataWindow(user, this);
+        connect(dw, &QWidget::destroyed, this, &on_pbCancel_clicked, Qt::UniqueConnection);
         dw->show();
+        ui->lePassword->setText("");
         hide();
     }
     catch(QString err){
@@ -57,4 +59,16 @@ void WindowCreate::closeEvent (QCloseEvent *event)
     event->accept();
     QApplication::quit();
 }
+
+
+void WindowCreate::on_checkBox_stateChanged(int state)
+{
+    if(state){
+        ui->lePassword->setEchoMode(QLineEdit::Normal);
+    }
+    else{
+        ui->lePassword->setEchoMode(QLineEdit::Password);
+    }
+}
+
 

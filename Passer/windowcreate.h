@@ -5,9 +5,10 @@
 #include "sqlitedbmanager.h"
 #include <QCloseEvent>
 #include "initdialog.h"
+#include "ui_windowlogin.h"
 
 namespace Ui {
-class WindowCreate;
+class WindowLogin;
 }
 
 class WindowCreate : public QMainWindow
@@ -25,9 +26,10 @@ private slots:
 //    void on_pbSignin_clicked();
 
     void on_pbContinue_clicked();
+    void on_checkBox_stateChanged(int state);
 
 private:
-    Ui::WindowCreate *ui;
+    Ui::WindowLogin *ui;
     SqliteDBManager *db;
     InitDialog *parentWin;
     void closeEvent (QCloseEvent *event);

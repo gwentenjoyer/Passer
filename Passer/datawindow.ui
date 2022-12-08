@@ -82,32 +82,9 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="0">
-         <widget class="QPushButton" name="pbRefresh">
-          <property name="cursor">
-           <cursorShape>PointingHandCursor</cursorShape>
-          </property>
-          <property name="text">
-           <string>Refresh</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0">
-         <spacer name="verticalSpacer_2">
-          <property name="orientation">
-           <enum>Qt::Vertical</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>20</width>
-            <height>40</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
        </layout>
       </item>
-      <item row="1" column="0">
+      <item row="4" column="0">
        <spacer name="verticalSpacer">
         <property name="orientation">
          <enum>Qt::Vertical</enum>
@@ -120,7 +97,7 @@
         </property>
        </spacer>
       </item>
-      <item row="2" column="0">
+      <item row="5" column="0">
        <layout class="QFormLayout" name="formLayout_2">
         <property name="verticalSpacing">
          <number>10</number>
@@ -146,6 +123,33 @@
          </widget>
         </item>
        </layout>
+      </item>
+      <item row="2" column="0">
+       <widget class="QPushButton" name="pbChangePassword">
+        <property name="text">
+         <string>Change password</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QPushButton" name="pbDeleteUser">
+        <property name="text">
+         <string>Delete user</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <spacer name="verticalSpacer_2">
+        <property name="orientation">
+         <enum>Qt::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
       </item>
      </layout>
     </item>

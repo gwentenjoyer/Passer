@@ -20,6 +20,7 @@
 
 #include "userinfo.h"
 #include "dbmanager.h"
+#include <qsqlquerymodel.h>
 
 class SqliteDBManager : public DbManager {
 
@@ -29,10 +30,11 @@ public:
     QSqlDatabase getDB();
     bool insert(const UserInfo&);
     bool insert(const UserPublicData *upi,const DataInfo& dataInfo);
-    void deleteDataRow(int rowId);
+    void remove(int rowId);
+    void remove(const UserPublicData *upi);
     UserPublicData* searchForUser(const UserInfo& userInfo);
     void updateDataRow(const DataInfo &data);
-
+    QSqlQueryModel* getQueryModel(const UserPublicData *userPublicData, QObject *parent = nullptr);
     virtual ~SqliteDBManager() override;
 
 private:

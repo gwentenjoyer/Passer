@@ -63,6 +63,7 @@ bool SqliteDBManager::openDataBase()
     db.setDatabaseName(DATABASE_NAME);
     if(db.open()){
         qDebug() << "Database " DATABASE_NAME "@" DATABASE_HOSTNAME " has successfully connected.";
+        db.exec("PRAGMA foreign_keys=ON");
         return true;
     }
     else
@@ -159,7 +160,7 @@ bool SqliteDBManager::insert(const UserPublicData *upi, const DataInfo& dataInfo
         return true;
 }
 
-void SqliteDBManager::deleteDataRow(int rowId) {
+void SqliteDBManager::remove(int rowId) {
     QSqlQuery query;
     query.prepare("DELETE FROM " TABLE_DATA " WHERE id = " + QString::number(rowId) + ";");
 
@@ -170,6 +171,19 @@ void SqliteDBManager::deleteDataRow(int rowId) {
         throw query.lastError().text() + " caused by: " + query.lastQuery();
     }
     qDebug() << "Successfully deleted row with id = " + QString::number(rowId);
+}
+
+void SqliteDBManager::remove(const UserPublicData *upi) {
+    QSqlQuery query;
+    query.prepare("DELETE FROM " TABLE_USERS " WHERE id = " + QString::number(upi->id) + ";");
+
+    if(!query.exec()){
+        qDebug() << "error deleting " << TABLE_USERS;
+        qDebug() << query.lastError().text();
+        qDebug() << query.lastQuery();
+        throw query.lastError().text() + " caused by: " + query.lastQuery();
+    }
+    qDebug() << "Successfully deleted user " << upi->username << " with id = " << QString::number(upi->id);
 }
 
 void SqliteDBManager::updateDataRow(const DataInfo &data){
@@ -222,4 +236,21 @@ UserPublicData* SqliteDBManager::searchForUser(const UserInfo& userInfo) {
         }
     }
     return user;
+}
+
+QSqlQueryModel* SqliteDBManager::getQueryModel(const UserPublicData *userPublicData, QObject *parent) {
+// accout_id is hidden
+QSqlQueryModel *sqlmodel = new QSqlQueryModel(parent);        // possible memory leak
+
+    sqlmodel->setQuery("SELECT "
+                   TABLE_DATA ".id, "
+                   TABLE_DATA_TITLE ", "
+                   TABLE_DATA "." TABLE_DATA_URL ", "
+                   TABLE_DATA "." TABLE_DATA_USERNAME ", "
+                   TABLE_DATA "." TABLE_DATA_PASSWORD ", "
+                   TABLE_DATA "." TABLE_DATA_DESCRIPTION
+                   " FROM " TABLE_DATA " INNER JOIN " TABLE_USERS
+                   " ON (" TABLE_USERS".id = " TABLE_DATA ".account_id) WHERE "
+                   TABLE_DATA ".account_id = " + QString::number(userPublicData->id) + ";");
+    return sqlmodel;
 }

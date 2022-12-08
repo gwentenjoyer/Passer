@@ -1,6 +1,5 @@
 #include "windowopen.h"
-//#include "ui_windowopen.h"
-#include "ui_windowcreate.h"
+#include "ui_windowlogin.h"
 
 #include "initdialog.h"
 #include <iostream>
@@ -14,7 +13,7 @@
 WindowOpen::WindowOpen(InitDialog *parent) :
 //    QMainWindow(parent),
     parentWin(parent),
-    ui(new Ui::WindowCreate),
+    ui(new Ui::WindowLogin),
     db(SqliteDBManager::getInstance())
 {
     ui->setupUi(this);
@@ -44,6 +43,7 @@ void WindowOpen::on_pbContinue_clicked()
 
         DataWindow *dw = new DataWindow(user, this);
         dw->show();
+        ui->lePassword->setText("");
         hide();
         }
      catch(QString err) {
@@ -59,3 +59,14 @@ void WindowOpen::closeEvent (QCloseEvent *event)
     event->accept();
     QApplication::quit();
 }
+
+void WindowOpen::on_checkBox_stateChanged(int state)
+{
+    if(state){
+        ui->lePassword->setEchoMode(QLineEdit::Normal);
+    }
+    else{
+        ui->lePassword->setEchoMode(QLineEdit::Password);
+    }
+}
+

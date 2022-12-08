@@ -4,6 +4,7 @@
 #include <QSqlDatabase>
 #include "userinfo.h"
 #include "datainfo.h"
+#include <qsqlquerymodel.h>
 
 class DbManager
 {
@@ -14,8 +15,10 @@ public:
     virtual QSqlDatabase getDB() = 0;
     virtual bool insert(const UserInfo&) = 0;
     virtual bool insert(const UserPublicData *upi,const DataInfo& dataInfo) = 0;
-    virtual void deleteDataRow(int rowId) = 0;
+    virtual void remove(int rowId) = 0;
+    virtual void remove(const UserPublicData *upi) = 0;
     virtual UserPublicData* searchForUser(const UserInfo& userInfo) = 0;
+    virtual QSqlQueryModel* getQueryModel(const UserPublicData *userPublicData, QObject *parent) = 0;
 
     virtual ~DbManager(){}
 
