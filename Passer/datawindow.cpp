@@ -12,6 +12,7 @@
 #include "editentry.h"
 #include "datainfo.h"
 #include "passerclipboard.h"
+#include "changepassword.h"
 //QClipboard *cp = QApplication::clipboard();
 //QClipboard *cp = qApp->clipboard();
 
@@ -105,15 +106,16 @@ void DataWindow::updateTableViewModel(QTableView *tb) {
 //    tb->setModel(sqlModel);
 //    QAbstractItemModel *model = sqlModel;
 //    qDebug() << sqlModel->rowCount();
-//    for(int i = 0; i < sqlModel->rowCount(); ++i){
-////            model->index(selectedRow, 0).data().toInt();
-////            model->setData(model->index(i, 4), "********");
-////            model->index(4, i).data().setValue("****");
-////        qDebug() << sqlModel->index(4, i).data().setValue("****");
-//        QVariant var("**");
-//        qDebug() << var;
-//        qDebug() << sqlModel->setData(sqlModel->index(3, 4), 1, Qt::UserRole);
-//    }
+    for(int i = 0; i < sqlModel->rowCount(); ++i){
+//            model->index(selectedRow, 0).data().toInt();
+//            model->setData(model->index(i, 4), "********");
+//            model->index(4, i).data().setValue("****");
+//        qDebug() << sqlModel->index(4, i).data().setValue("****");
+        QVariant var("**");
+        qDebug() << var;
+//        qDebug() << sqlModel->setData(sqlModel->index(i, 4), var,Qt::UserRole);
+        qDebug() << sqlModel->setData(sqlModel->index(i, 4), var);
+    }
     tb->setModel(sqlModel);
 }
 
@@ -134,6 +136,7 @@ void DataWindow::on_tableView_clicked(const QModelIndex &index)
 {
     tableSelectedRowDataId = ui->tableView->model()->data(ui->tableView->model()->index(index.row(),0)).toInt();
     selectedRow = index.row();
+    qDebug() << "cell clicked";
 }
 
 void DataWindow::on_pbEdit_clicked()
@@ -170,5 +173,13 @@ void DataWindow::on_pbDeleteUser_clicked()
         db->remove(currentUser);
         on_pbCancel_clicked();
     }
+}
+
+
+void DataWindow::on_pbChangePassword_clicked()
+{
+    ChangePassword *changeWin = new ChangePassword;
+    changeWin->setWindowModality(Qt::WindowModality::WindowModal);
+    changeWin->show();
 }
 

@@ -27,6 +27,7 @@ RC_FILE = passer.rc
 
 SOURCES += \
     addentry.cpp \
+    changepassword.cpp \
     datainfo.cpp \
     datawindow.cpp \
     dbmanager.cpp \
@@ -41,6 +42,7 @@ SOURCES += \
 
 HEADERS += \
     addentry.h \
+    changepassword.h \
     datainfo.h \
     datawindow.h \
     dbmanager.h \

@@ -44,6 +44,8 @@ private slots:
 
     void on_pbDeleteUser_clicked();
 
+    void on_pbChangePassword_clicked();
+
 private:
     Ui::DataWindow *ui;
     UserPublicData *currentUser;
