@@ -46,12 +46,23 @@ DataWindow::DataWindow(UserPublicData *currUser, QMainWindow *parent)
 void DataWindow::customContextMenuProceed(QPoint pos){
     qDebug() << "here";
     menu.addAction(&this->act);
+//    menu.menuAction()->setDisabled(true);
+    qDebug() << selectedCell.x() << selectedCell.y();
+    if (selectedCell.x() != 4 && selectedCell.x()!= 3)
+        menu.actions().first()->setDisabled(true);
+    else
+        menu.actions().first()->resetEnabled();
     menu.popup(QCursor::pos());
 }
 void DataWindow::copySlot(){
-    qDebug() << "called copy ";
-    clipboard->setText("Passer");
-    ui->statusbar->showMessage("coppied");
+    clipboard->clear();
+    if(selectedCell.x() == 3){
+        ui->statusbar->showMessage("Copied username");
+    }
+    else if(selectedCell.x() == 4){
+        ui->statusbar->showMessage("Copied password");
+    }
+    clipboard->setText(ui->tableView->model()->index(selectedCell.y(), selectedCell.x()).data().toString());
 }
 
 DataWindow::~DataWindow()
@@ -136,7 +147,9 @@ void DataWindow::on_tableView_clicked(const QModelIndex &index)
 {
     tableSelectedRowDataId = ui->tableView->model()->data(ui->tableView->model()->index(index.row(),0)).toInt();
     selectedRow = index.row();
-    qDebug() << "cell clicked";
+    selectedCell.setX(index.column());
+    selectedCell.setY(index.row());
+    qDebug() << "cell clicked (" << index.column() << ", " << index.row() << ")";
 }
 
 void DataWindow::on_pbEdit_clicked()
