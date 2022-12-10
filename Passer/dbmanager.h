@@ -20,6 +20,10 @@ public:
     virtual UserPublicData* searchForUser(const UserInfo& userInfo) = 0;
     virtual QSqlQueryModel* getQueryModel(const UserPublicData *userPublicData, QObject *parent) = 0;
 
+    virtual QString getPasswordHash(const UserPublicData *upi) = 0;
+
+    virtual void updatePasswordHash(const UserPublicData *user, const QString &newHash) = 0;
+
     virtual ~DbManager(){}
 
 };

@@ -254,3 +254,44 @@ QSqlQueryModel *sqlmodel = new QSqlQueryModel(parent);        // possible memory
                    TABLE_DATA ".account_id = " + QString::number(userPublicData->id) + ";");
     return sqlmodel;
 }
+
+QString SqliteDBManager::getPasswordHash(const UserPublicData *upi){
+    QSqlQuery query;
+    QString gottenHash;
+
+    query.prepare("SELECT " TABLE_USERS_PASSWORD " FROM " TABLE_USERS
+                  " WHERE " TABLE_USERS_USER " = :usr;");
+    query.bindValue(":usr", upi->username);
+
+    if (!query.exec()) {
+        qDebug() << "Query failed!";
+        qDebug() << query.lastError().text();
+        qDebug() << query.lastQuery();
+        throw (QString)"Error occured while proceeding query: " + query.lastError().text() + " \nQuery: " + query.lastQuery();
+    } else {
+        if (query.first()) {
+            gottenHash = query.value(TABLE_USERS_PASSWORD).toString();
+        } else {
+            qDebug () << "Wrong user for getting password";
+            throw (QString)"Wrong user for getting password";
+        }
+    }
+    return gottenHash;
+}
+
+void SqliteDBManager::updatePasswordHash(const UserPublicData *user, const QString &newHash){
+    QSqlQuery query;
+
+    query.prepare("UPDATE  " TABLE_USERS
+                  " SET " TABLE_USERS_PASSWORD " = '" + newHash + "' "
+                  " WHERE id = '" + user->username + "';");
+
+    if(!query.exec()){
+        qDebug() << "error updating password " << TABLE_USERS;
+        qDebug() << query.lastError().text();
+        qDebug() << query.lastQuery();
+        throw query.lastError().text() + " caused by: " + query.lastQuery();
+    }
+    else
+        qDebug() << "Successfully updated password hash for user " << user->username;
+}

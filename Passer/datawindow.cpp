@@ -187,7 +187,7 @@ void DataWindow::on_pbDeleteUser_clicked()
 
 void DataWindow::on_pbChangePassword_clicked()
 {
-    ChangePassword *changeWin = new ChangePassword;
+    ChangePassword *changeWin = new ChangePassword(currentUser, this);
     changeWin->setWindowModality(Qt::WindowModality::WindowModal);
     changeWin->show();
 }

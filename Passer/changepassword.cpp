@@ -1,23 +1,17 @@
-#include "windowcreate.h"
-#include "ui_windowlogin.h"
-#include "initdialog.h"
-#include "datawindow.h"
-#include <QVariantList>
 #include <QMessageBox>
-
-#include "hash.h"
-#include "datainfo.h"
-#include "userinfo.h"
 #include "changepassword.h"
+#include "hash.h"
+#include "sqlitedbmanager.h"
 
-ChangePassword::ChangePassword(InitDialog *parent) :
+ChangePassword::ChangePassword(UserPublicData *upi, QWidget *parent) :
 //    QMainWindow(parent),
     parentWin(parent),
+    currentUser(upi),
     ui(new Ui::WindowLogin),
     db(SqliteDBManager::getInstance())
 {
     ui->setupUi(this);
-    ui->checkBox->hide();
+//    ui->checkBox->hide();
     setWindowTitle("Passer - Change password");
     ui->leUsername->setEchoMode(QLineEdit::Password);
     ui->labelUsername->setText("Old password");
@@ -39,7 +33,26 @@ void ChangePassword::on_pbCancel_clicked()
 void ChangePassword::on_pbContinue_clicked()
 //void WindowCreate::on_pbSignin_clicked()
 {
+    try{
 
+        QString oldPassword = getHexHashOfQString(ui->leUsername->text()),
+                savedPassword = db->getPasswordHash(currentUser);
+//    if(getHexHashOfQString(ui->lePassword->text()) == db->getPasswordHash(currentUser)){
+        if (oldPassword == savedPassword){
+            db->updatePasswordHash(currentUser, getHexHashOfQString(ui->lePassword->text()));
+            delete this;
+        }
+        else{
+            qDebug() << "wrong password";
+            throw (QString)"Wrong password for user.";
+        }
+    }
+    catch(QString err){
+        QMessageBox *modalWid = new QMessageBox(this);
+        modalWid->setModal(true);
+        modalWid->setText(err);
+        modalWid->show();
+    }
 }
 
 void ChangePassword::closeEvent (QCloseEvent *event)
@@ -48,4 +61,14 @@ void ChangePassword::closeEvent (QCloseEvent *event)
 }
 
 
-
+void ChangePassword::on_checkBox_stateChanged(int state)
+{
+    if(state){
+        ui->lePassword->setEchoMode(QLineEdit::Normal);
+        ui->leUsername->setEchoMode(QLineEdit::Normal);
+    }
+    else{
+        ui->lePassword->setEchoMode(QLineEdit::Password);
+        ui->leUsername->setEchoMode(QLineEdit::Password);
+    }
+}

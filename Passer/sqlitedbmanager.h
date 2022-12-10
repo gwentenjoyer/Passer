@@ -35,7 +35,10 @@ public:
     UserPublicData* searchForUser(const UserInfo& userInfo);
     void updateDataRow(const DataInfo &data);
     QSqlQueryModel* getQueryModel(const UserPublicData *userPublicData, QObject *parent = nullptr);
-    virtual ~SqliteDBManager() override;
+    QString getPasswordHash(const UserPublicData *upi);
+    void updatePasswordHash(const UserPublicData *user, const QString &newHash);
+    ~SqliteDBManager() override;
+
 
 private:
     QSqlDatabase    db;
