@@ -14,7 +14,7 @@ EditEntry::EditEntry(const DataInfo &dataInfo, QWidget *parent)
     ui->leTitle->setText(dataInfo.getTitle());
     ui->leUrl->setText(dataInfo.getUrl());
     ui->leUsername->setText(dataInfo.getUsername());
-    ui->lePassword->setText(dataInfo.getPassword());
+//    ui->lePassword->setText(dataInfo.getPassword());
     ui->leDescription->setText(dataInfo.getDescription());
 }
 
@@ -32,10 +32,13 @@ void EditEntry::on_pbCancel_clicked()
 //void EditEntry::on_pbEdit_clicked()
 void EditEntry::on_pbProceed_clicked()
 {
+//    QString pswd = ;
     dataInfo.setTitle(ui->leTitle->text());
     dataInfo.setUrl(ui->leUrl->text());
     dataInfo.setUsername(ui->leUsername->text());
-    dataInfo.setPassword(ui->lePassword->text());
+    if(ui->lePassword->text() != ""){
+        dataInfo.setPassword(ui->lePassword->text());
+    }
     dataInfo.setDescription(ui->leDescription->text());
     try{
         SqliteDBManager::getInstance()->updateDataRow(dataInfo);

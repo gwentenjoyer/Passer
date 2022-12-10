@@ -106,16 +106,16 @@ void DataWindow::updateTableViewModel(QTableView *tb) {
 //    tb->setModel(sqlModel);
 //    QAbstractItemModel *model = sqlModel;
 //    qDebug() << sqlModel->rowCount();
-    for(int i = 0; i < sqlModel->rowCount(); ++i){
-//            model->index(selectedRow, 0).data().toInt();
-//            model->setData(model->index(i, 4), "********");
-//            model->index(4, i).data().setValue("****");
-//        qDebug() << sqlModel->index(4, i).data().setValue("****");
-        QVariant var("**");
-        qDebug() << var;
-//        qDebug() << sqlModel->setData(sqlModel->index(i, 4), var,Qt::UserRole);
-        qDebug() << sqlModel->setData(sqlModel->index(i, 4), var);
-    }
+//    for(int i = 0; i < sqlModel->rowCount(); ++i){
+////            model->index(selectedRow, 0).data().toInt();
+////            model->setData(model->index(i, 4), "********");
+////            model->index(4, i).data().setValue("****");
+////        qDebug() << sqlModel->index(4, i).data().setValue("****");
+//        QVariant var("**");
+//        qDebug() << var;
+////        qDebug() << sqlModel->setData(sqlModel->index(i, 4), var,Qt::UserRole);
+//        qDebug() << sqlModel->setData(sqlModel->index(i, 4), var);
+//    }
     tb->setModel(sqlModel);
 }
 
