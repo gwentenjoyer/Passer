@@ -32,7 +32,6 @@ ChangePassword::~ChangePassword()
 
 void ChangePassword::on_pbCancel_clicked()
 {
-    parentWin->show();
     delete this;
 }
 
@@ -46,7 +45,6 @@ void ChangePassword::on_pbContinue_clicked()
 void ChangePassword::closeEvent (QCloseEvent *event)
 {
     event->accept();
-    QApplication::quit();
 }
 
 
