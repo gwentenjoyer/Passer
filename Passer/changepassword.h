@@ -1,7 +1,7 @@
 #ifndef CHANGEPASSWORD_H
 #define CHANGEPASSWORD_H
 
-#include "sqlitedbmanager.h"
+#include "dbmanager.h"
 #include <QCloseEvent>
 #include "ui_windowlogin.h"
 
@@ -25,7 +25,7 @@ private slots:
     void on_checkBox_stateChanged(int state);
 private:
     Ui::WindowLogin *ui;
-    SqliteDBManager *db;
+    DbManager *db;
     QWidget *parentWin;
     UserPublicData *currentUser;
     void closeEvent (QCloseEvent *event);

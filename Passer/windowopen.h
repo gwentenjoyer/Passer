@@ -2,7 +2,7 @@
 #define WINDOWOPEN_H
 
 #include <QMainWindow>
-#include "sqlitedbmanager.h"
+#include "dbmanager.h"
 #include <QCloseEvent>
 #include <QMessageBox>
 #include <QApplication>
@@ -32,9 +32,8 @@ private slots:
     void on_checkBox_stateChanged(int arg1);
 
 private:
-//    Ui::WindowOpen *ui;
     Ui::WindowLogin *ui;
-    SqliteDBManager *db;
+    DbManager *db;
     InitDialog *parentWin;
     void closeEvent (QCloseEvent *event);
 };

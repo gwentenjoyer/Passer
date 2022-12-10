@@ -2,7 +2,7 @@
 #define WINDOWCREATE_H
 
 #include <QMainWindow>
-#include "sqlitedbmanager.h"
+#include "dbmanager.h"
 #include <QCloseEvent>
 #include "initdialog.h"
 #include "ui_windowlogin.h"
@@ -30,7 +30,7 @@ private slots:
 
 private:
     Ui::WindowLogin *ui;
-    SqliteDBManager *db;
+    DbManager *db;
     InitDialog *parentWin;
     void closeEvent (QCloseEvent *event);
 };

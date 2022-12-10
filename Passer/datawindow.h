@@ -2,7 +2,7 @@
 #define DATAWINDOW_H
 
 #include <QMainWindow>
-#include "sqlitedbmanager.h"
+#include "dbmanager.h"
 #include <QMainWindow>
 
 #include <QSqlQueryModel>
@@ -50,7 +50,7 @@ private:
     Ui::DataWindow *ui;
     UserPublicData *currentUser;
     QMainWindow *parentWin;
-    SqliteDBManager *db;
+    DbManager *db;
     QSqlQueryModel *sqlModel;
     QMenu menu;
     QAction act;
