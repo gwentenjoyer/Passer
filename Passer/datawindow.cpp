@@ -44,10 +44,7 @@ DataWindow::DataWindow(UserPublicData *currUser, QMainWindow *parent)
 }
 
 void DataWindow::customContextMenuProceed(QPoint pos){
-    qDebug() << "here";
     menu.addAction(&this->act);
-//    menu.menuAction()->setDisabled(true);
-    qDebug() << selectedCell.x() << selectedCell.y();
     if (selectedCell.x() != 4 && selectedCell.x()!= 3)
         menu.actions().first()->setDisabled(true);
     else
@@ -149,7 +146,6 @@ void DataWindow::on_tableView_clicked(const QModelIndex &index)
     selectedRow = index.row();
     selectedCell.setX(index.column());
     selectedCell.setY(index.row());
-    qDebug() << "cell clicked (" << index.column() << ", " << index.row() << ")";
 }
 
 void DataWindow::on_pbEdit_clicked()
