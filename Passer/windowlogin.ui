@@ -180,6 +180,7 @@
  <tabstops>
   <tabstop>leUsername</tabstop>
   <tabstop>lePassword</tabstop>
+  <tabstop>checkBox</tabstop>
   <tabstop>pbContinue</tabstop>
   <tabstop>pbCancel</tabstop>
  </tabstops>

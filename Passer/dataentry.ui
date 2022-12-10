@@ -183,6 +183,15 @@
    </item>
   </layout>
  </widget>
+ <tabstops>
+  <tabstop>leTitle</tabstop>
+  <tabstop>leUrl</tabstop>
+  <tabstop>leUsername</tabstop>
+  <tabstop>lePassword</tabstop>
+  <tabstop>leDescription</tabstop>
+  <tabstop>pbProceed</tabstop>
+  <tabstop>pbCancel</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

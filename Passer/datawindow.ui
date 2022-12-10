@@ -170,6 +170,16 @@
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
+ <tabstops>
+  <tabstop>pbAdd</tabstop>
+  <tabstop>pbEdit</tabstop>
+  <tabstop>pbDelete</tabstop>
+  <tabstop>pbChangePassword</tabstop>
+  <tabstop>pbDeleteUser</tabstop>
+  <tabstop>pbCancel</tabstop>
+  <tabstop>pbQuit</tabstop>
+  <tabstop>tableView</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
