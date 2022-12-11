@@ -12,6 +12,7 @@ ChangePassword::ChangePassword(UserPublicData *upi, QWidget *parent) :
 {
     ui->setupUi(this);
 //    ui->checkBox->hide();
+    setWindowModality(Qt::WindowModal);
     setWindowTitle("Passer - Change password");
     ui->leUsername->setEchoMode(QLineEdit::Password);
     ui->labelUsername->setText("Old password");

@@ -284,7 +284,7 @@ void SqliteDBManager::updatePasswordHash(const UserPublicData *user, const QStri
 
     query.prepare("UPDATE  " TABLE_USERS
                   " SET " TABLE_USERS_PASSWORD " = '" + newHash + "' "
-                  " WHERE id = '" + user->username + "';");
+                  " WHERE id = '" + QString::number(user->id) + "';");
 
     if(!query.exec()){
         qDebug() << "error updating password " << TABLE_USERS;
@@ -292,6 +292,8 @@ void SqliteDBManager::updatePasswordHash(const UserPublicData *user, const QStri
         qDebug() << query.lastQuery();
         throw query.lastError().text() + " caused by: " + query.lastQuery();
     }
-    else
+    else {
+        qDebug() << query.lastQuery();
         qDebug() << "Successfully updated password hash for user " << user->username;
+    }
 }
